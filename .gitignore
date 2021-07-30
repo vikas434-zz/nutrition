@@ -2,7 +2,8 @@
 *.class
 
 # Idea class
-.idea/
+.idea/*
+.idea/jarRepositories.xml
 
 # Target folder
 target/
