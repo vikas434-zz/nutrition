@@ -3,6 +3,8 @@ package co.rivatech.nutrition.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import co.rivatech.nutrition.model.Village;
 
 /**
@@ -12,4 +14,5 @@ import co.rivatech.nutrition.model.Village;
 @Repository
 public interface VillageRepository extends CrudRepository<Village, Integer> {
 
+    List<Village> findVillageByPanchayatId(final int panchayatId);
 }

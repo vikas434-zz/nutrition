@@ -3,6 +3,7 @@ package co.rivatech.nutrition.resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +32,14 @@ public class VillageResource {
 
     @GetMapping("/")
     @ApiOperation(value = "Get lists of all the villages.")
-    public List<Village> getAllPanchayats() {
+    public List<Village> getAllVillages() {
        return villageService.getAllVillages();
+    }
+
+    @GetMapping("/findVillageByPanchayatId/{panchayatId}")
+    @ApiOperation(value = "Get lists of all the villages by panchayatId.")
+    public List<Village> getAllVillageByPanchayatId(@Nonnull @PathVariable int panchayatId) {
+        return villageService.getAllVillagesByPanchayatId(panchayatId);
     }
 
     @PostMapping("/add")

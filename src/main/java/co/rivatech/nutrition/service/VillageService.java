@@ -31,4 +31,8 @@ public class VillageService {
         villageRepository.save(village);
         return village;
     }
+
+    public List<Village> getAllVillagesByPanchayatId(final int panchayatId) {
+        return villageRepository.findVillageByPanchayatId(panchayatId);
+    }
 }
