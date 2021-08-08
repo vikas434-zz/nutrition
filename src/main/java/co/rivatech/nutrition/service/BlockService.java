@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import co.rivatech.nutrition.model.Block;
 import co.rivatech.nutrition.repository.BlockRepository;
@@ -30,5 +31,9 @@ public class BlockService {
     public Block addBlock(final Block block) {
         blockRepository.save(block);
         return block;
+    }
+
+    public Optional<Block> getBlockById(final int blockId) {
+        return blockRepository.findById(blockId);
     }
 }
