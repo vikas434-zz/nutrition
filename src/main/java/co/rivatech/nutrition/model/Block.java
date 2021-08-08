@@ -32,17 +32,18 @@ public class Block {
     private int id;
 
     @Column(name = "district_id")
+    @ApiModelProperty(value = "District Id", required = true)
     private int districtId;
 
+    @ApiModelProperty(value = "Name", required = true)
     @Column(name = "name")
     private String name;
 
+    @ApiModelProperty(value = "Name in hindi", required = true)
     @Column(name = "name_hi")
     private String nameHindi;
 
+    @ApiModelProperty(value = "Created at time")
     @Column(name = "created_at")
     private Date createdAt;
-
-    @Column(name = "updated_at")
-    private Date updatedAt;
 }
