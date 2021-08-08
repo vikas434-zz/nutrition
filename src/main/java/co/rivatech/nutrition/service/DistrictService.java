@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import co.rivatech.nutrition.model.District;
 import co.rivatech.nutrition.repository.DistrictRepository;
@@ -30,5 +31,9 @@ public class DistrictService {
     public District addDistrict(final District district) {
         districtRepository.save(district);
         return district;
+    }
+
+    public Optional<District> getDistrictById(final int districtId) {
+        return districtRepository.findById(districtId);
     }
 }
