@@ -14,7 +14,6 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-import co.rivatech.nutrition.model.Block;
 import co.rivatech.nutrition.model.Panchayat;
 import co.rivatech.nutrition.service.PanchayatService;
 import io.swagger.annotations.ApiOperation;
@@ -42,6 +41,12 @@ public class PanchayatResource {
     @ApiOperation(value = "Find the panchayat details by id.", notes = "Returns @code{Optional.of} panchayat. Null if not found.")
     public Optional<Panchayat> getBlockById(@Nonnull @PathVariable int id) {
         return panchayatService.getPanchayatById(id);
+    }
+
+    @GetMapping("/findAllByBlockId/{blockId}")
+    @ApiOperation(value = "Find the panchayat details by block id.", notes = "Returns List of panchayat. Null if not found.")
+    public List<Panchayat> getBlocksByDistrictId(@Nonnull @PathVariable int blockId) {
+        return panchayatService.getPanchayatsByBlockId(blockId);
     }
 
     @PostMapping("/add")

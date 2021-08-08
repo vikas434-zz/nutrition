@@ -36,4 +36,8 @@ public class BlockService {
     public Optional<Block> getBlockById(final int blockId) {
         return blockRepository.findById(blockId);
     }
+
+    public List<Block> getBlockByDistrictId(final int districtId) {
+        return blockRepository.findByDistrictId(districtId);
+    }
 }

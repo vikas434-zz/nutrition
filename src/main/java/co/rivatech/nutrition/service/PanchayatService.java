@@ -36,4 +36,8 @@ public class PanchayatService {
     public Optional<Panchayat> getPanchayatById(final int panchayatId) {
         return panchayatRepository.findById(panchayatId);
     }
+
+    public List<Panchayat> getPanchayatsByBlockId(final int districtId) {
+        return panchayatRepository.findPanchayatByBlockId(districtId);
+    }
 }

@@ -49,4 +49,10 @@ public class BlockResource {
         return ResponseEntity.ok(blockService.addBlock(block));
     }
 
+    @GetMapping("/findByDistrictId/{districtId}")
+    @ApiOperation(value = "Find the block details by  district id.", notes = "Returns List of block. Null if not found.")
+    public List<Block> getBlockByDistrictId(@Nonnull @PathVariable int districtId) {
+        return blockService.getBlockByDistrictId(districtId);
+    }
+
 }
