@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import co.rivatech.nutrition.model.Panchayat;
 import co.rivatech.nutrition.repository.PanchayatRepository;
@@ -30,5 +31,9 @@ public class PanchayatService {
     public Panchayat addPanchayat(final Panchayat panchayat) {
         panchayatRepository.save(panchayat);
         return panchayat;
+    }
+
+    public Optional<Panchayat> getPanchayatById(final int panchayatId) {
+        return panchayatRepository.findById(panchayatId);
     }
 }
