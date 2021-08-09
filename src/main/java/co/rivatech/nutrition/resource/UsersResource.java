@@ -42,8 +42,8 @@ public class UsersResource {
     }
 
     @GetMapping("/findByMobile/{mobile}")
-    @ApiOperation(value = "Checks if the user exists by mobile number or not, returns true or false")
-    public ResponseEntity<Boolean> findByMobileNumber(@RequestParam BigInteger mobile) {
+    @ApiOperation(value = "Returns user details by mobile number or else throw 404.")
+    public ResponseEntity<User> findByMobileNumber(@RequestParam BigInteger mobile) {
         return ResponseEntity.ok(usersService.findByMobile(mobile));
     }
 

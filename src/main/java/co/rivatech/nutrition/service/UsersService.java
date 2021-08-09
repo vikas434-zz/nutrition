@@ -7,6 +7,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.User;
 import co.rivatech.nutrition.repository.UsersRepository;
 
@@ -32,7 +33,10 @@ public class UsersService {
         return user;
     }
 
-    public Boolean findByMobile(final BigInteger mobile) {
-        return usersRepository.findByMobile(mobile).isPresent();
+    public User findByMobile(final BigInteger mobile) {
+        return usersRepository.findByMobile(mobile)
+                              .orElseThrow(() -> new ResourceNotFoundException(String.format(
+                                      "User not found with mobile number %s",
+                                      mobile)));
     }
 }
