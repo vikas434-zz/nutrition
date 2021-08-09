@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Village;
 import co.rivatech.nutrition.repository.VillageRepository;
 
@@ -33,6 +34,10 @@ public class VillageService {
     }
 
     public List<Village> getAllVillagesByPanchayatId(final int panchayatId) {
-        return villageRepository.findVillageByPanchayatId(panchayatId);
+        final List<Village> villages =  villageRepository.findVillageByPanchayatId(panchayatId);
+        if(villages.isEmpty()) {
+            throw new ResourceNotFoundException(String.format("No village found with panchayat id %s", panchayatId));
+        }
+        return villages;
     }
 }

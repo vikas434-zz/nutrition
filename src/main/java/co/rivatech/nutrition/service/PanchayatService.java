@@ -38,11 +38,10 @@ public class PanchayatService {
                                                                                                                  panchayatId)));
     }
 
-    public List<Panchayat> getPanchayatsByDistrictAndBlockId(final int districtId, final int blockId) {
-        final List<Panchayat> panchayats = panchayatRepository.findPanchayatByDistrictIdAndBlockId(districtId, blockId);
+    public List<Panchayat> findPanchayatByBlockId(final int blockId) {
+        final List<Panchayat> panchayats = panchayatRepository.findPanchayatByBlockId(blockId);
         if (panchayats.isEmpty()) {
-            throw new ResourceNotFoundException(String.format("No Panchayat found with district id %s and blockId %s",
-                                                              districtId,
+            throw new ResourceNotFoundException(String.format("No Panchayat found with block id %s",
                                                               blockId));
         }
         return panchayats;

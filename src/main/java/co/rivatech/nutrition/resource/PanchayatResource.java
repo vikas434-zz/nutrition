@@ -33,19 +33,21 @@ public class PanchayatResource {
     @GetMapping("/")
     @ApiOperation(value = "Get lists of all the panchayats.")
     public List<Panchayat> getAllPanchayats() {
-       return panchayatService.getAllPanchayats();
+        return panchayatService.getAllPanchayats();
     }
 
     @GetMapping("/findById/{id}")
-    @ApiOperation(value = "Find the panchayat details by id.", notes = "Returns panchayat else throws exception.")
+    @ApiOperation(value = "Find the panchayat details by id.",
+                  notes = "Returns  panchayat details by id or throw exception.")
     public Panchayat getBlockById(@Nonnull @PathVariable int id) {
         return panchayatService.getPanchayatById(id);
     }
 
-    @GetMapping("/findAllByDistrictAndBlockId/{districtId}/{blockId}")
-    @ApiOperation(value = "Find the panchayat details by block id.", notes = "Returns List of panchayats else throws exception.")
-    public List<Panchayat> getBlocksByDistrictId(@Nonnull @PathVariable int districtId, @Nonnull @PathVariable int blockId) {
-        return panchayatService.getPanchayatsByDistrictAndBlockId(districtId, blockId);
+    @GetMapping("/findAllByBlockId/{blockId}")
+    @ApiOperation(value = "Find the panchayat details by block id.",
+                  notes = "Returns panchayat. Null if not found.")
+    public List<Panchayat> getPanchayatByBlockId(@Nonnull @PathVariable int blockId) {
+        return panchayatService.findPanchayatByBlockId(blockId);
     }
 
     @PostMapping("/add")

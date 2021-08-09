@@ -37,7 +37,7 @@ public class VillageResource {
     }
 
     @GetMapping("/findVillageByPanchayatId/{panchayatId}")
-    @ApiOperation(value = "Get lists of all the villages by panchayatId.")
+    @ApiOperation(value = "Get lists of all the villages by panchayatId or throw exception")
     public List<Village> getAllVillageByPanchayatId(@Nonnull @PathVariable int panchayatId) {
         return villageService.getAllVillagesByPanchayatId(panchayatId);
     }
