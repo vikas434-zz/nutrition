@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Block;
 import co.rivatech.nutrition.repository.BlockRepository;
 
@@ -33,11 +33,17 @@ public class BlockService {
         return block;
     }
 
-    public Optional<Block> getBlockById(final int blockId) {
-        return blockRepository.findById(blockId);
+    public Block getBlockById(final int blockId) {
+        return blockRepository.findById(blockId)
+                              .orElseThrow(() -> new ResourceNotFoundException(String.format("No block found with id %s",
+                                                                                             blockId)));
     }
 
     public List<Block> getBlockByDistrictId(final int districtId) {
-        return blockRepository.findByDistrictId(districtId);
+        List<Block> blocks = blockRepository.findByDistrictId(districtId);
+        if (blocks.isEmpty()) {
+            throw new ResourceNotFoundException(String.format("No block found with district id %s", districtId));
+        }
+        return blocks;
     }
 }
