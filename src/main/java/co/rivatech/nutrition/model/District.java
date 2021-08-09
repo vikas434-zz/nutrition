@@ -44,7 +44,7 @@ public class District {
     private String nameHindi;
 
     @Column(name = "short_name")
-    @ApiModelProperty(value = "Short name for abbrevivaton" , required = true)
+    @ApiModelProperty(value = "Short name for abbrevivaton. This has to be unique." , required = true)
     private String shortName;
 
     @Column(name = "created_at")
