@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
@@ -38,8 +37,8 @@ public class DistrictResource {
     }
 
     @GetMapping("/findById/{id}")
-    @ApiOperation(value = "Find the district details by id.", notes = "Returns @code{Optional.of} district. Null if not found.")
-    public Optional<District> getDistrictById(@Nonnull @PathVariable int id) {
+    @ApiOperation(value = "Find the district details by id.", notes = "Returns district details if found else 404.")
+    public District getDistrictById(@Nonnull @PathVariable int id) {
         return districtService.getDistrictById(id);
     }
 

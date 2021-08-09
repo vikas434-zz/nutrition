@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.District;
 import co.rivatech.nutrition.repository.DistrictRepository;
 
@@ -33,7 +33,7 @@ public class DistrictService {
         return district;
     }
 
-    public Optional<District> getDistrictById(final int districtId) {
-        return districtRepository.findById(districtId);
+    public District getDistrictById(final int districtId) {
+        return districtRepository.findById(districtId).orElseThrow(() -> new ResourceNotFoundException(String.format("No district found with id %s ", districtId)));
     }
 }
