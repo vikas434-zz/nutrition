@@ -19,6 +19,7 @@
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
         <maven-pmd-plugin-version>3.13.0</maven-pmd-plugin-version>
         <google-cloud-translate>1.98.5</google-cloud-translate>
+        <hibernate-types-52>2.12.1</hibernate-types-52>
     </properties>
     <dependencies>
         <dependency>
@@ -63,6 +64,11 @@
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-translate</artifactId>
             <version>${google-cloud-translate}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vladmihalcea</groupId>
+            <artifactId>hibernate-types-52</artifactId>
+            <version>${hibernate-types-52}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
