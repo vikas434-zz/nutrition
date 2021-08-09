@@ -14,5 +14,5 @@ import co.rivatech.nutrition.model.Panchayat;
 @Repository
 public interface PanchayatRepository extends CrudRepository<Panchayat, Integer> {
 
-    List<Panchayat> findPanchayatByBlockId(final int blockId);
+    List<Panchayat> findPanchayatByDistrictIdAndBlockId(final int districtId, final int blockId);
 }

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Panchayat;
 import co.rivatech.nutrition.repository.PanchayatRepository;
 
@@ -33,11 +33,18 @@ public class PanchayatService {
         return panchayat;
     }
 
-    public Optional<Panchayat> getPanchayatById(final int panchayatId) {
-        return panchayatRepository.findById(panchayatId);
+    public Panchayat getPanchayatById(final int panchayatId) {
+        return panchayatRepository.findById(panchayatId).orElseThrow(() ->new ResourceNotFoundException(String.format("No Panchayat found with panchayatId %s",
+                                                                                                                 panchayatId)));
     }
 
-    public List<Panchayat> getPanchayatsByBlockId(final int districtId) {
-        return panchayatRepository.findPanchayatByBlockId(districtId);
+    public List<Panchayat> getPanchayatsByDistrictAndBlockId(final int districtId, final int blockId) {
+        final List<Panchayat> panchayats = panchayatRepository.findPanchayatByDistrictIdAndBlockId(districtId, blockId);
+        if (panchayats.isEmpty()) {
+            throw new ResourceNotFoundException(String.format("No Panchayat found with district id %s and blockId %s",
+                                                              districtId,
+                                                              blockId));
+        }
+        return panchayats;
     }
 }

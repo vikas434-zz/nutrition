@@ -20,7 +20,6 @@ public class BlockService {
     @Autowired
     private BlockRepository blockRepository;
 
-
     public List<Block> getAllBlocks() {
         List<Block> blocks = new ArrayList<>();
         Iterable<Block> items = blockRepository.findAll();

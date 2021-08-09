@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
@@ -38,15 +37,15 @@ public class PanchayatResource {
     }
 
     @GetMapping("/findById/{id}")
-    @ApiOperation(value = "Find the panchayat details by id.", notes = "Returns @code{Optional.of} panchayat. Null if not found.")
-    public Optional<Panchayat> getBlockById(@Nonnull @PathVariable int id) {
+    @ApiOperation(value = "Find the panchayat details by id.", notes = "Returns panchayat else throws exception.")
+    public Panchayat getBlockById(@Nonnull @PathVariable int id) {
         return panchayatService.getPanchayatById(id);
     }
 
-    @GetMapping("/findAllByBlockId/{blockId}")
-    @ApiOperation(value = "Find the panchayat details by block id.", notes = "Returns List of panchayat. Null if not found.")
-    public List<Panchayat> getBlocksByDistrictId(@Nonnull @PathVariable int blockId) {
-        return panchayatService.getPanchayatsByBlockId(blockId);
+    @GetMapping("/findAllByDistrictAndBlockId/{districtId}/{blockId}")
+    @ApiOperation(value = "Find the panchayat details by block id.", notes = "Returns List of panchayats else throws exception.")
+    public List<Panchayat> getBlocksByDistrictId(@Nonnull @PathVariable int districtId, @Nonnull @PathVariable int blockId) {
+        return panchayatService.getPanchayatsByDistrictAndBlockId(districtId, blockId);
     }
 
     @PostMapping("/add")
