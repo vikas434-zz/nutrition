@@ -70,26 +70,6 @@ public class Family {
                       required = true)
     private BigInteger mobile;
 
-    @Column(name = "district_id")
-    @ApiModelProperty(value = "districtId",
-                      required = true)
-    private int districtId;
-
-    @Column(name = "block_id")
-    @ApiModelProperty(value = "blockId",
-                      required = true)
-    private int blockId;
-
-    @Column(name = "panchayat_id")
-    @ApiModelProperty(value = "panchayatId",
-                      required = true)
-    private int panchayatId;
-
-    @Column(name = "village_id")
-    @ApiModelProperty(value = "villageId",
-                      required = true)
-    private int villageId;
-
     @Type(type = "jsonb")
     @Column(name = "details_json", columnDefinition = "jsonb")
     @ApiModelProperty(value = "details_json",

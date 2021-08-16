@@ -5,6 +5,7 @@ import java.io.Serializable;
 import co.rivatech.nutrition.enums.Caste;
 import co.rivatech.nutrition.enums.Religion;
 import co.rivatech.nutrition.enums.Sex;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -31,5 +32,21 @@ public class FamilyDetails implements Serializable {
     private int mamChild;
 
     private int anaemicWomen;
+
+    @ApiModelProperty(value = "districtId",
+                      required = true)
+    private int districtId;
+
+    @ApiModelProperty(value = "blockId",
+                      required = true)
+    private int blockId;
+
+    @ApiModelProperty(value = "panchayatId",
+                      required = true)
+    private int panchayatId;
+
+    @ApiModelProperty(value = "villageId",
+                      required = true)
+    private int villageId;
 
 }
