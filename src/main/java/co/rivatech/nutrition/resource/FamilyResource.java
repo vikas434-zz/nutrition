@@ -27,13 +27,13 @@ public class FamilyResource {
     @Autowired
     private FamilyService familyService;
 
-    @GetMapping("checkMobile/{mobile}")
+    @GetMapping("/checkMobile/{mobile}")
     @ApiOperation(value = "Checks if mobile number exists or throws exception")
     public Family checkMobileNumberExists(@Nonnull @PathVariable BigInteger mobile) {
         return familyService.checkMobileNumber(mobile);
     }
 
-    @GetMapping("getByFamilyId/{familyId}")
+    @GetMapping("/getByFamilyId/{familyId}")
     @ApiOperation(value = "Get family details by family id")
     public Family getFamilyById(@Nonnull @PathVariable String familyId) {
         return familyService.getFamilyDetailsByFamilyId(familyId);

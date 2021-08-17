@@ -5,10 +5,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Map;
 
+import co.rivatech.nutrition.enums.Caste;
 import co.rivatech.nutrition.enums.Entity;
+import co.rivatech.nutrition.enums.Religion;
+import co.rivatech.nutrition.enums.Sex;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
+import co.rivatech.nutrition.model.Configs;
 import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.model.FamilyDetails;
 import co.rivatech.nutrition.repository.FamilyRepository;
@@ -77,5 +82,14 @@ public class FamilyService {
                                        "No Family details found with familyId %s ",
                                        familyId)));
 
+    }
+
+    public Configs getAllConfigs() {
+        return Configs.builder()
+                      .casteList(Arrays.asList(Caste.values()))
+                      .religionList(Arrays.asList(Religion.values()))
+                      .sexList(Arrays.asList(
+                              Sex.values()))
+                      .build();
     }
 }
