@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.math.BigInteger;
 import java.util.Map;
 
 import co.rivatech.nutrition.enums.Entity;
+import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.model.FamilyDetails;
 import co.rivatech.nutrition.repository.FamilyRepository;
@@ -21,10 +23,10 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class FamilyService {
 
-    private static final String           SEPERATOR = "/";
+    private static final String SEPERATOR = "/";
 
     @Autowired
-    private              FamilyRepository familyRepository;
+    private FamilyRepository familyRepository;
 
     @Autowired
     private ShortNameMapRepository shortNameMapRepository;
@@ -41,7 +43,7 @@ public class FamilyService {
         final String block = shortMap.get(Entity.BLOCK).get(details.getBlockId());
         final String panchayat = shortMap.get(Entity.PANCHAYAT).get(details.getPanchayatId());
         final String village = shortMap.get(Entity.VILLAGE).get(details.getVillageId());
-        final int id = familyRepository.findTopByOrderByIdDesc().orElseGet(Family::new).getId();
+        final int id = familyRepository.findTopByOrderByIdDesc().orElseGet(Family::new).getId() + 1;
         log.info("District {} Block {} Panchayat {} Village {} and Id {}", district, block, panchayat, village, id);
         return district +
                 SEPERATOR +
@@ -60,5 +62,20 @@ public class FamilyService {
                                                                      .getTotalChildren() + family.getDetails()
                                                                                                  .getTotalWomen(),
                       "Total family size mismatch.");
+    }
+
+    public Family checkMobileNumber(final BigInteger mobile) {
+        return familyRepository.findByMobile(mobile)
+                               .orElseThrow(() -> new ResourceNotFoundException(String.format(
+                                       "No Family details found with mobile %s ",
+                                       mobile)));
+    }
+
+    public Family getFamilyDetailsByFamilyId(final String familyId) {
+        return familyRepository.findByFamilyId(familyId)
+                               .orElseThrow(() -> new ResourceNotFoundException(String.format(
+                                       "No Family details found with familyId %s ",
+                                       familyId)));
+
     }
 }
