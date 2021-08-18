@@ -9,6 +9,7 @@ import java.util.List;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.District;
 import co.rivatech.nutrition.repository.DistrictRepository;
+import springfox.documentation.annotations.Cacheable;
 
 /**
  * @author vranjan
@@ -20,7 +21,7 @@ public class DistrictService {
     @Autowired
     private DistrictRepository districtRepository;
 
-
+    @Cacheable("districts")
     public List<District> getAllDistricts() {
         List<District> districts = new ArrayList<>();
         Iterable<District> items = districtRepository.findAll();

@@ -14,6 +14,7 @@ import co.rivatech.nutrition.enums.Religion;
 import co.rivatech.nutrition.enums.Sex;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Configs;
+import co.rivatech.nutrition.model.DistrictMaps;
 import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.model.FamilyDetails;
 import co.rivatech.nutrition.repository.FamilyRepository;
@@ -35,6 +36,18 @@ public class FamilyService {
 
     @Autowired
     private ShortNameMapRepository shortNameMapRepository;
+
+    @Autowired
+    private DistrictService districtService;
+
+    @Autowired
+    private BlockService blockService;
+
+    @Autowired
+    private PanchayatService panchayatService;
+
+    @Autowired
+    private VillageService villageService;
 
     public Family addFamily(final Family family) {
         validateFamilyData(family);
@@ -91,5 +104,14 @@ public class FamilyService {
                       .sexList(Arrays.asList(
                               Sex.values()))
                       .build();
+    }
+
+    public DistrictMaps getAllDistrictData() {
+        final DistrictMaps maps = new DistrictMaps();
+        maps.setDistricts(districtService.getAllDistricts());
+        maps.setBlocks(blockService.getAllBlocks());
+        maps.setPanchayats(panchayatService.getAllPanchayats());
+        maps.setVillages(villageService.getAllVillages());
+        return maps;
     }
 }

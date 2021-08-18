@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.rivatech.nutrition.model.Configs;
+import co.rivatech.nutrition.model.DistrictMaps;
 import co.rivatech.nutrition.service.FamilyService;
 import io.swagger.annotations.ApiOperation;
 
@@ -20,9 +21,15 @@ public class ConfigResource {
     @Autowired
     private FamilyService familyService;
 
-    @GetMapping("/allConfig")
+    @GetMapping("/allConstants")
     @ApiOperation(value = "Gets the list of enums like caste, religion etc.")
     public Configs getAllConfig() {
         return familyService.getAllConfigs();
+    }
+
+    @GetMapping("/allDistrictData")
+    @ApiOperation(value = "Gets the details of Districts, Blocks, Panchayats, Villages etc.")
+    public DistrictMaps getAllDistrictData() {
+        return familyService.getAllDistrictData();
     }
 }

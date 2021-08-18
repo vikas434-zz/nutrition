@@ -62,4 +62,5 @@ public class ShortNameMapRepository {
         shortNameMap.put(Entity.VILLAGE, villageMap);
         return shortNameMap;
     }
+
 }
