@@ -1,7 +1,6 @@
 package co.rivatech.nutrition.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,8 +43,8 @@ public class VillageResource {
 
     @PostMapping("/add")
     @ApiOperation(value = "Add a village.")
-    public ResponseEntity<Village> addDistrict(@Nonnull @RequestBody Village village) {
-        return ResponseEntity.ok(villageService.addVillage(village));
+    public Village addDistrict(@Nonnull @RequestBody Village village) {
+        return villageService.addVillage(village);
     }
 
 }

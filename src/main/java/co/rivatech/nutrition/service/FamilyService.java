@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class FamilyService {
 
-    private static final String SEPERATOR = "/";
+    private static final String SEPERATOR = "-";
 
     @Autowired
     private FamilyRepository familyRepository;
