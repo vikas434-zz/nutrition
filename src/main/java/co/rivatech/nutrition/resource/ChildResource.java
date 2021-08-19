@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import co.rivatech.nutrition.model.Child;
@@ -31,9 +33,9 @@ public class ChildResource {
         return childService.addChild(child);
     }
 
-    @GetMapping("/getByFullFamilyId/{familyId}")
-    @ApiOperation(value = "Gets details of the child by full familyId, e.g. ")
-    public void getChildByFullFamilyId(@Nonnull @PathVariable String familyId) {
-
+    @GetMapping("/getByFamilyId/{familyId}")
+    @ApiOperation(value = "Gets details of the child by familyId, e.g. ")
+    public List<Child> getChildByFamilyId(@Nonnull @PathVariable int familyId) {
+    return childService.getChildByFamilyId(familyId);
     }
 }
