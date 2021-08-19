@@ -39,11 +39,20 @@ public class FamilyResource {
         return familyService.getFamilyDetailsByFamilyId(familyId);
     }
 
-
+    //TODO
     public void getPaginatedFamilyData() {
 
     }
 
+    //TODO
+    public void findByMobile() {
+
+    }
+
+    //TODO
+    public void findByFamilyHead() {
+
+    }
 
     @PostMapping("/add")
     @ApiOperation(value = "Adds a family details",
