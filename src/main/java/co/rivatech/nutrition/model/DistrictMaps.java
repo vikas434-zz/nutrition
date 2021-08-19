@@ -18,4 +18,6 @@ public class DistrictMaps {
     private List<Panchayat> panchayats;
 
     private List<Village> villages;
+
+    private List<Tola> tolas;
 }

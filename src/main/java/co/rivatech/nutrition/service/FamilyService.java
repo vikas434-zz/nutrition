@@ -49,6 +49,9 @@ public class FamilyService {
     @Autowired
     private VillageService villageService;
 
+    @Autowired
+    private TolaService tolaService;
+
     public Family addFamily(final Family family) {
         validateFamilyData(family);
         family.setFamilyId(getShortId(family.getDetails()));
@@ -112,6 +115,7 @@ public class FamilyService {
         maps.setBlocks(blockService.getAllBlocks());
         maps.setPanchayats(panchayatService.getAllPanchayats());
         maps.setVillages(villageService.getAllVillages());
+        maps.setTolas(tolaService.getAllTola());
         return maps;
     }
 }
