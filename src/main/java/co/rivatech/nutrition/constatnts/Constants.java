@@ -6,5 +6,6 @@ package co.rivatech.nutrition.constatnts;
  */
 public class Constants {
 
-    public static final String NOT_FOUND = "नहीं मिला";
+    public static final String NOT_FOUND      = "नहीं मिला";
+    public static final String    ALREADY_EXISTS = "पहले से ही मौजूद है";
 }

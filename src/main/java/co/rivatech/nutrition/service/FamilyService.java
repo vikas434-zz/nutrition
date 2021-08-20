@@ -106,6 +106,11 @@ public class FamilyService {
                       .religionList(Arrays.asList(Religion.values()))
                       .sexList(Arrays.asList(
                               Sex.values()))
+                      .districts(districtService.getAllDistricts())
+                      .blocks(blockService.getAllBlocks())
+                      .panchayats(panchayatService.getAllPanchayats())
+                      .villages(villageService.getAllVillages())
+                      .tolas(tolaService.getAllTola())
                       .build();
     }
 

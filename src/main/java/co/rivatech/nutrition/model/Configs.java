@@ -22,4 +22,14 @@ public class Configs {
 
     private List<Sex> sexList;
 
+    private List<District> districts;
+
+    private List<Block> blocks;
+
+    private List<Panchayat> panchayats;
+
+    private List<Village> villages;
+
+    private List<Tola> tolas;
+
 }
