@@ -8,15 +8,18 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Map;
 
-import co.rivatech.nutrition.enums.Caste;
-import co.rivatech.nutrition.enums.Entity;
-import co.rivatech.nutrition.enums.Religion;
-import co.rivatech.nutrition.enums.Sex;
-import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.dto.Configs;
 import co.rivatech.nutrition.dto.DistrictMaps;
-import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.dto.FamilyDetails;
+import co.rivatech.nutrition.enums.Caste;
+import co.rivatech.nutrition.enums.Entity;
+import co.rivatech.nutrition.enums.MemberWorkingOut;
+import co.rivatech.nutrition.enums.Religion;
+import co.rivatech.nutrition.enums.Sex;
+import co.rivatech.nutrition.enums.WorkDuration;
+import co.rivatech.nutrition.enums.WorkLocation;
+import co.rivatech.nutrition.exception.ResourceNotFoundException;
+import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.repository.FamilyRepository;
 import co.rivatech.nutrition.repository.ShortNameMapRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -55,6 +58,7 @@ public class FamilyService {
     public Family addFamily(final Family family) {
         validateFamilyData(family);
         family.setFamilyId(getShortId(family.getDetails()));
+        //TODO save other details to other tables.
         return familyRepository.save(family);
     }
 
@@ -106,6 +110,9 @@ public class FamilyService {
                       .religionList(Arrays.asList(Religion.values()))
                       .sexList(Arrays.asList(
                               Sex.values()))
+                      .workLocations(Arrays.asList(WorkLocation.values()))
+                      .workDurations(Arrays.asList(WorkDuration.values()))
+                      .memberWorkingOutList(Arrays.asList(MemberWorkingOut.values()))
                       .districts(districtService.getAllDistricts())
                       .blocks(blockService.getAllBlocks())
                       .panchayats(panchayatService.getAllPanchayats())

@@ -49,4 +49,9 @@ public class FamilyDetails implements Serializable {
                       required = true)
     private int villageId;
 
+    private Location location;
+
+    private Occupation occupation;
+
+    private Finance finance;
 }

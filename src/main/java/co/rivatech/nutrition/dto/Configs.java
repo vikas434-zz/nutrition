@@ -3,8 +3,11 @@ package co.rivatech.nutrition.dto;
 import java.util.List;
 
 import co.rivatech.nutrition.enums.Caste;
+import co.rivatech.nutrition.enums.MemberWorkingOut;
 import co.rivatech.nutrition.enums.Religion;
 import co.rivatech.nutrition.enums.Sex;
+import co.rivatech.nutrition.enums.WorkDuration;
+import co.rivatech.nutrition.enums.WorkLocation;
 import co.rivatech.nutrition.model.Block;
 import co.rivatech.nutrition.model.District;
 import co.rivatech.nutrition.model.Panchayat;
@@ -27,6 +30,12 @@ public class Configs {
 
     private List<Sex> sexList;
 
+    private List<WorkLocation> workLocations;
+
+    private List<WorkDuration> workDurations;
+
+    private List<MemberWorkingOut> memberWorkingOutList;
+
     private List<District> districts;
 
     private List<Block> blocks;
@@ -36,5 +45,6 @@ public class Configs {
     private List<Village> villages;
 
     private List<Tola> tolas;
+
 
 }
