@@ -1,6 +1,7 @@
 package co.rivatech.nutrition.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import co.rivatech.nutrition.enums.Caste;
 import co.rivatech.nutrition.enums.Religion;
@@ -49,9 +50,15 @@ public class FamilyDetails implements Serializable {
                       required = true)
     private int villageId;
 
+    private List<Children> childrenList;
+
+    private List<Women> womenList;
+
     private Location location;
 
     private Occupation occupation;
 
     private Finance finance;
+
+
 }
