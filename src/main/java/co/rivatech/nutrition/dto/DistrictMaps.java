@@ -1,7 +1,12 @@
-package co.rivatech.nutrition.model;
+package co.rivatech.nutrition.dto;
 
 import java.util.List;
 
+import co.rivatech.nutrition.model.Block;
+import co.rivatech.nutrition.model.District;
+import co.rivatech.nutrition.model.Panchayat;
+import co.rivatech.nutrition.model.Tola;
+import co.rivatech.nutrition.model.Village;
 import lombok.Data;
 
 /**

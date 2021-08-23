@@ -1,4 +1,4 @@
-package co.rivatech.nutrition.model;
+package co.rivatech.nutrition.dto;
 
 import java.io.Serializable;
 

@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.rivatech.nutrition.model.Configs;
-import co.rivatech.nutrition.model.DistrictMaps;
+import co.rivatech.nutrition.dto.Configs;
+import co.rivatech.nutrition.dto.DistrictMaps;
 import co.rivatech.nutrition.service.FamilyService;
 import io.swagger.annotations.ApiOperation;
 

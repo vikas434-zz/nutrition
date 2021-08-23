@@ -13,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import co.rivatech.nutrition.dto.Location;
+import co.rivatech.nutrition.dto.Occupation;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -24,9 +24,9 @@ import lombok.Data;
  *
  */
 @Data
-@Entity(name = "location_details")
+@Entity(name = "occupation_details")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class LocationDetails {
+public class OccupationDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -41,7 +41,7 @@ public class LocationDetails {
     @Column(name = "details_json", columnDefinition = "jsonb")
     @ApiModelProperty(value = "details_json",
                       required = true)
-    private Location details;
+    private Occupation details;
 
     @Column(name = "created_at")
     @ApiModelProperty(value = "createdAt")

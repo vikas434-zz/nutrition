@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import co.rivatech.nutrition.dto.FamilyDetails;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
