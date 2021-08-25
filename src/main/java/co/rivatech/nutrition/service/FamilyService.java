@@ -58,7 +58,7 @@ public class FamilyService {
     public Family addFamily(final Family family) {
         validateFamilyData(family);
         family.setFamilyId(getShortId(family.getDetails()));
-        //TODO save other details to other tables.
+        //TODO save other details to other tables, including women and children.
         return familyRepository.save(family);
     }
 
