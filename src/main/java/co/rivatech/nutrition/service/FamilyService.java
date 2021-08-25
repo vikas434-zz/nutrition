@@ -130,4 +130,12 @@ public class FamilyService {
         maps.setTolas(tolaService.getAllTola());
         return maps;
     }
+
+
+    public Family findByMobileNumber(final BigInteger mobile) {
+         return familyRepository.findByMobile(mobile)
+                                     .orElseThrow(() -> new ResourceNotFoundException(String.format(
+                                             "Family not found with mobile number %s",
+                                             mobile)));
+    }
 }
