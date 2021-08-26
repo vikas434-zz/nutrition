@@ -30,4 +30,11 @@ public class GlobalExceptionHandler {
                 new ErrorDetails(new Date(), exception.getMessage(), Constants.ALREADY_EXISTS, request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(MobileAlreadyExistsException.class)
+    public ResponseEntity<?> MobileAlreadyExists(MobileAlreadyExistsException exception, WebRequest request){
+        ErrorDetails errorDetails =
+                new ErrorDetails(new Date(), exception.getMessage(), Constants.ALREADY_EXISTS, request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
 }

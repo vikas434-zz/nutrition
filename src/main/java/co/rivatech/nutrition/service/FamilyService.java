@@ -18,6 +18,7 @@ import co.rivatech.nutrition.enums.Religion;
 import co.rivatech.nutrition.enums.Sex;
 import co.rivatech.nutrition.enums.WorkDuration;
 import co.rivatech.nutrition.enums.WorkLocation;
+import co.rivatech.nutrition.exception.MobileAlreadyExistsException;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.repository.FamilyRepository;
@@ -82,6 +83,10 @@ public class FamilyService {
     }
 
     private void validateFamilyData(final Family family) { //NOPMD
+        final BigInteger mobile = family.getMobile();
+        if(familyRepository.findByMobile(mobile).isPresent()) {
+            throw new MobileAlreadyExistsException(String.format("Mobile entry exists with this number %s", mobile));
+        }
         Assert.notNull(family.getDetails(), "Family details not shared.");
         Assert.isTrue(family.getDetails().getTotalMembers() >= family.getDetails()
                                                                      .getTotalChildren() + family.getDetails()
@@ -131,11 +136,4 @@ public class FamilyService {
         return maps;
     }
 
-
-    public Family findByMobileNumber(final BigInteger mobile) {
-         return familyRepository.findByMobile(mobile)
-                                     .orElseThrow(() -> new ResourceNotFoundException(String.format(
-                                             "Family not found with mobile number %s",
-                                             mobile)));
-    }
 }

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
@@ -43,12 +42,6 @@ public class FamilyResource {
     //TODO
     public void getPaginatedFamilyData() {
 
-    }
-
-    @GetMapping("/findByMobile/{mobile}")
-    @ApiOperation(value = "Returns family details by mobile number or else throw 404.")
-    public Family findByMobile(@RequestParam BigInteger mobile) {
-        return familyService.findByMobileNumber(mobile);
     }
 
     //TODO
