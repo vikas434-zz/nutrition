@@ -1,5 +1,7 @@
 package co.rivatech.nutrition.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import co.rivatech.nutrition.enums.MemberWorkingOut;
 import co.rivatech.nutrition.enums.RationColor;
 import co.rivatech.nutrition.enums.WorkDuration;
@@ -14,6 +16,7 @@ import lombok.Data;
 public class Occupation {
     private Boolean havingRationCard;
 
+    @JsonIgnore
     private RationColor rationCardColor;
 
     private Boolean havingAgriLand;
@@ -24,11 +27,14 @@ public class Occupation {
 
     private Boolean goingOutToWork;
 
+    @JsonIgnore
     private WorkLocation workLocation;
 
+    @JsonIgnore
     private WorkDuration workDuration;
 
     private Boolean SHGConnection;
 
+    @JsonIgnore
     private MemberWorkingOut memberWorkingOut;
 }

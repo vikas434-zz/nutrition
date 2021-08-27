@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 
@@ -39,14 +42,26 @@ public class FamilyResource {
         return familyService.getFamilyDetailsByFamilyId(familyId);
     }
 
-    //TODO
-    public void getPaginatedFamilyData() {
-
+    @GetMapping("/getPaginatedFamilyData")
+    @ApiOperation(value = "Get paginated family data by offset and limit")
+    public List<Family> getPaginatedFamilyData(@RequestParam(defaultValue = "0") Integer pageNo,
+                                               @RequestParam(defaultValue = "10") Integer pageSize) {
+        //TODO implement list
+        return Arrays.asList(new Family());
     }
 
-    //TODO
-    public void findByFamilyHead() {
+    @GetMapping("/getFamilyByFullFamilyId/{fullFamilyId}")
+    @ApiOperation(value = "Find details about the family from family id e.g. KA-BO-CH-2")
+    public Family getFamilyByFullFamilyId(@Nonnull @PathVariable String fullFamilyId) {
+        //TODO family id
+        return new Family();
+    }
 
+    @GetMapping("/getByFamilyHead/{familyHead}")
+    @ApiOperation(value = "Find details about the family from family head name")
+    public Family findByFamilyHead(@Nonnull @PathVariable String familyHead) {
+        //TODO find by family Head
+        return new Family();
     }
 
     @PostMapping("/add")
