@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,9 +57,10 @@ public class FamilyResource {
 
         Page<Family> pagedResult = familyService.findAll(paging);
 
-        if(pagedResult.hasContent()) {
+        if (pagedResult.hasContent()) {
             return pagedResult.getContent();
-        } else {
+        }
+        else {
             return Collections.emptyList();
         }
     }
@@ -65,7 +68,7 @@ public class FamilyResource {
     @GetMapping("/getFamilyByFullFamilyId/{fullFamilyId}")
     @ApiOperation(value = "Find details about the family from family id e.g. KA-BO-CH-2")
     public Family getFamilyByFullFamilyId(@Nonnull @PathVariable String fullFamilyId) {
-       return familyService.getFamilyDetailsByFullFamilyId(fullFamilyId);
+        return familyService.getFamilyDetailsByFullFamilyId(fullFamilyId);
     }
 
     @GetMapping("/getByFamilyHead/{familyHead}")
@@ -85,5 +88,13 @@ public class FamilyResource {
                   notes = "Returns family data or throws exception")
     public Family addFamily(@Nonnull @RequestBody Family family) {
         return familyService.addFamily(family);
+    }
+
+    @DeleteMapping("/deleteById/{familyId}")
+    @ApiOperation(value = "Delete family by id.",
+                  notes = "Successfully deletes family data or throws exception")
+    public ResponseEntity<?> deleteByFamilyId(@PathVariable int familyId) {
+        familyService.deleteById(familyId);
+        return ResponseEntity.ok().build();
     }
 }

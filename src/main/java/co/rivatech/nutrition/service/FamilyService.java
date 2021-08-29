@@ -246,4 +246,8 @@ public class FamilyService {
     public Page<Family> findAll(final Pageable paging) {
         return familyRepository.findAll(paging);
     }
+
+    public void deleteById(final int familyId) {
+         familyRepository.deleteById(familyId);
+    }
 }
