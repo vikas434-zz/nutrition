@@ -1,5 +1,7 @@
 package co.rivatech.nutrition.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -28,6 +30,7 @@ public class Child {
     @ApiModelProperty(value = "Family id", required = true)
     private int familyId;
 
+    @JsonIgnore
     @Column(name = "created_at")
     private Date createdAt;
 

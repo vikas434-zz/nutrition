@@ -23,6 +23,10 @@ public class ChildService {
         return childRepository.save(child);
     }
 
+    public void addAllChild(final List<Child> children) {
+         childRepository.saveAll(children);
+    }
+
     public List<Child> getChildByFamilyId(final int familyId) {
         final List<Child> children =  childRepository.findByFamilyId(familyId);
         if(children.isEmpty()) {

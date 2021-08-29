@@ -1,13 +1,19 @@
 package co.rivatech.nutrition.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import co.rivatech.nutrition.dto.Children;
 import co.rivatech.nutrition.dto.Configs;
 import co.rivatech.nutrition.dto.DistrictMaps;
 import co.rivatech.nutrition.dto.FamilyDetails;
@@ -20,6 +26,7 @@ import co.rivatech.nutrition.enums.WorkDuration;
 import co.rivatech.nutrition.enums.WorkLocation;
 import co.rivatech.nutrition.exception.MobileAlreadyExistsException;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
+import co.rivatech.nutrition.model.Child;
 import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.repository.FamilyRepository;
 import co.rivatech.nutrition.repository.ShortNameMapRepository;
@@ -56,11 +63,50 @@ public class FamilyService {
     @Autowired
     private TolaService tolaService;
 
+    @Autowired
+    private ChildService childService;
+
     public Family addFamily(final Family family) {
         validateFamilyData(family);
         family.setFamilyId(getShortId(family.getDetails()));
+
         //TODO save other details to other tables, including women and children.
-        return familyRepository.save(family);
+        final Family savedData =  familyRepository.save(family);
+        saveOtherDetailsAsync(savedData.getDetails(), savedData.getId());
+        return savedData;
+    }
+
+    @Async
+    protected void saveOtherDetailsAsync(final FamilyDetails details, final int familyId) {
+        final List<Children> childrenList = details.getChildrenList();
+        if (!CollectionUtils.isEmpty(childrenList)) {
+            final List<Child> children = new ArrayList<>();
+            childrenList.forEach(c -> {
+                final Child child = new Child();
+                child.setFamilyId(familyId);
+                child.setName(c.getName());
+                child.setNameHindi(c.getNameHindi());
+                children.add(child);
+            });
+            childService.addAllChild(children);
+        }
+
+//        if (!CollectionUtils.isEmpty(details.getWomenList())) {
+//            womenService.save(details.getChildrenList(), familyId);
+//        }
+//
+//        if (Objects.nonNull(details.getLocation())) {
+//            locationService.save(details.getLocation(), familyId);
+//        }
+//
+//        if (Objects.nonNull(details.getOccupation())) {
+//            occupationService.save(details.getOccupation(), familyId);
+//        }
+//
+//        if (Objects.nonNull(details.getFinance())) {
+//            financialService.save(details.getFinance(), familyId);
+//        }
+
     }
 
     private String getShortId(final FamilyDetails details) {
@@ -84,7 +130,7 @@ public class FamilyService {
 
     private void validateFamilyData(final Family family) { //NOPMD
         final BigInteger mobile = family.getMobile();
-        if(familyRepository.findByMobile(mobile).isPresent()) {
+        if (familyRepository.findByMobile(mobile).isPresent()) {
             throw new MobileAlreadyExistsException(String.format("Mobile entry exists with this number %s", mobile));
         }
         Assert.notNull(family.getDetails(), "Family details not shared.");
