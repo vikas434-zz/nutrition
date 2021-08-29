@@ -9,6 +9,7 @@ import org.springframework.util.CollectionUtils;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -17,6 +18,10 @@ import co.rivatech.nutrition.dto.Children;
 import co.rivatech.nutrition.dto.Configs;
 import co.rivatech.nutrition.dto.DistrictMaps;
 import co.rivatech.nutrition.dto.FamilyDetails;
+import co.rivatech.nutrition.dto.Finance;
+import co.rivatech.nutrition.dto.Location;
+import co.rivatech.nutrition.dto.Occupation;
+import co.rivatech.nutrition.dto.Women;
 import co.rivatech.nutrition.enums.Caste;
 import co.rivatech.nutrition.enums.Entity;
 import co.rivatech.nutrition.enums.MemberWorkingOut;
@@ -28,6 +33,10 @@ import co.rivatech.nutrition.exception.MobileAlreadyExistsException;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Child;
 import co.rivatech.nutrition.model.Family;
+import co.rivatech.nutrition.model.FinancialDetails;
+import co.rivatech.nutrition.model.LocationDetails;
+import co.rivatech.nutrition.model.OccupationDetails;
+import co.rivatech.nutrition.model.Woman;
 import co.rivatech.nutrition.repository.FamilyRepository;
 import co.rivatech.nutrition.repository.ShortNameMapRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -66,12 +75,23 @@ public class FamilyService {
     @Autowired
     private ChildService childService;
 
+    @Autowired
+    private WomanService womanService;
+
+    @Autowired
+    private LocationDetailsService locationDetailsService;
+
+    @Autowired
+    private OccupationDetailsService occupationDetailsService;
+
+    @Autowired
+    private FinancialDetailsService financialDetailsService;
+
     public Family addFamily(final Family family) {
         validateFamilyData(family);
         family.setFamilyId(getShortId(family.getDetails()));
-
-        //TODO save other details to other tables, including women and children.
         final Family savedData =  familyRepository.save(family);
+        //TODO check why family id is not in increasing order.
         saveOtherDetailsAsync(savedData.getDetails(), savedData.getId());
         return savedData;
     }
@@ -91,22 +111,47 @@ public class FamilyService {
             childService.addAllChild(children);
         }
 
-//        if (!CollectionUtils.isEmpty(details.getWomenList())) {
-//            womenService.save(details.getChildrenList(), familyId);
-//        }
-//
-//        if (Objects.nonNull(details.getLocation())) {
-//            locationService.save(details.getLocation(), familyId);
-//        }
-//
-//        if (Objects.nonNull(details.getOccupation())) {
-//            occupationService.save(details.getOccupation(), familyId);
-//        }
-//
-//        if (Objects.nonNull(details.getFinance())) {
-//            financialService.save(details.getFinance(), familyId);
-//        }
+        final List<Women> womanList = details.getWomenList();
+        if (!CollectionUtils.isEmpty(womanList)) {
+            final List<Woman> women = new ArrayList<>();
+            womanList.forEach(w->{
+                final Woman woman = new Woman();
+                woman.setFamilyId(familyId);
+                woman.setName(w.getName());
+                woman.setNameHindi(w.getNameHindi());
+                woman.setCreatedAt(new Date());
+                women.add(woman);
+            });
+            womanService.addAllWomen(women);
+        }
 
+        final Location location = details.getLocation();
+        if (Objects.nonNull(location)) {
+            final LocationDetails locationDetails = new LocationDetails();
+            locationDetails.setDetails(location);
+            locationDetails.setFamilyId(familyId);
+            locationDetails.setCreatedAt(new Date());
+            locationDetailsService.save(locationDetails);
+        }
+
+        final Occupation occupation = details.getOccupation();
+        if (Objects.nonNull(occupation)) {
+            final OccupationDetails occupationDetails = new OccupationDetails();
+            occupationDetails.setFamilyId(familyId);
+            occupationDetails.setDetails(occupation);
+            occupationDetails.setCreatedAt(new Date());
+            occupationDetailsService.save(occupationDetails);
+        }
+
+        final Finance finance = details.getFinance();
+        if (Objects.nonNull(finance)) {
+            final FinancialDetails financialDetails = new FinancialDetails();
+            financialDetails.setFamilyId(familyId);
+            financialDetails.setDetails(finance);
+            financialDetails.setCreatedAt(new Date());
+            financialDetailsService.save(financialDetails);
+        }
+        log.info("Other details saved for family id {}", familyId);
     }
 
     private String getShortId(final FamilyDetails details) {

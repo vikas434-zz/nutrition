@@ -23,6 +23,10 @@ public class WomanService {
         return womanRepository.save(woman);
     }
 
+    public void addAllWomen(final List<Woman> women) {
+        womanRepository.saveAll(women);
+    }
+
     public List<Woman> getWomanByFamilyId(final int familyId) {
         final List<Woman> woman =  womanRepository.findByFamilyId(familyId);
         if(woman.isEmpty()) {
