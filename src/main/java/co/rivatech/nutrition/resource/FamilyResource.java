@@ -1,6 +1,10 @@
 package co.rivatech.nutrition.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -38,30 +42,42 @@ public class FamilyResource {
 
     @GetMapping("/getByFamilyId/{familyId}")
     @ApiOperation(value = "Get family details by family id")
-    public Family getFamilyById(@Nonnull @PathVariable String familyId) {
-        return familyService.getFamilyDetailsByFamilyId(familyId);
+    public Family getFamilyById(@Nonnull @PathVariable int familyId) {
+        return familyService.getFamilyDetailsById(familyId);
     }
 
     @GetMapping("/getPaginatedFamilyData")
     @ApiOperation(value = "Get paginated family data by offset and limit")
     public List<Family> getPaginatedFamilyData(@RequestParam(defaultValue = "0") Integer pageNo,
-                                               @RequestParam(defaultValue = "10") Integer pageSize) {
-        //TODO implement list
-        return Arrays.asList(new Family());
+                                               @RequestParam(defaultValue = "10") Integer pageSize,
+                                               @RequestParam(defaultValue = "id") String sortBy) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+        Page<Family> pagedResult = familyService.findAll(paging);
+
+        if(pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     @GetMapping("/getFamilyByFullFamilyId/{fullFamilyId}")
     @ApiOperation(value = "Find details about the family from family id e.g. KA-BO-CH-2")
     public Family getFamilyByFullFamilyId(@Nonnull @PathVariable String fullFamilyId) {
-        //TODO family id
-        return new Family();
+       return familyService.getFamilyDetailsByFullFamilyId(fullFamilyId);
     }
 
     @GetMapping("/getByFamilyHead/{familyHead}")
     @ApiOperation(value = "Find details about the family from family head name")
-    public Family findByFamilyHead(@Nonnull @PathVariable String familyHead) {
-        //TODO find by family Head
-        return new Family();
+    public List<Family> findByFamilyHead(@Nonnull @PathVariable String familyHead) {
+        return familyService.getFamilyDetailsByFamilyHead(familyHead);
+    }
+
+    @GetMapping("/getByFamilyHeadHindi/{familyHead}")
+    @ApiOperation(value = "Find details about the family from family head name in Hindi, e.g राजपाल यादव")
+    public List<Family> findByFamilyHeadHindi(@Nonnull @PathVariable String familyHead) {
+        return familyService.getFamilyDetailsByFamilyHeadHindi(familyHead);
     }
 
     @PostMapping("/add")

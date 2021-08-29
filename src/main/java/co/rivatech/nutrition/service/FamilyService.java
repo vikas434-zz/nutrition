@@ -1,6 +1,8 @@
 package co.rivatech.nutrition.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -192,8 +194,8 @@ public class FamilyService {
                                        mobile)));
     }
 
-    public Family getFamilyDetailsByFamilyId(final String familyId) {
-        return familyRepository.findByFamilyId(familyId)
+    public Family getFamilyDetailsById(final int familyId) {
+        return familyRepository.findById(familyId)
                                .orElseThrow(() -> new ResourceNotFoundException(String.format(
                                        "No Family details found with familyId %s ",
                                        familyId)));
@@ -227,4 +229,21 @@ public class FamilyService {
         return maps;
     }
 
+    public Family getFamilyDetailsByFullFamilyId(final String fullFamilyId) {
+        return familyRepository.findByFamilyId(fullFamilyId).orElseThrow(() -> new ResourceNotFoundException(String.format(
+                "No Family details found with full familyId %s ",
+                fullFamilyId)));
+    }
+
+    public List<Family> getFamilyDetailsByFamilyHeadHindi(final String familyHead) {
+        return familyRepository.findByNameHindiContaining(familyHead);
+    }
+
+    public List<Family> getFamilyDetailsByFamilyHead(final String familyHead) {
+        return familyRepository.findByNameContaining(familyHead);
+    }
+
+    public Page<Family> findAll(final Pageable paging) {
+        return familyRepository.findAll(paging);
+    }
 }
