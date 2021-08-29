@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,6 +90,15 @@ public class FamilyResource {
     public Family addFamily(@Nonnull @RequestBody Family family) {
         return familyService.addFamily(family);
     }
+
+    @PutMapping("/update")
+    @ApiOperation(value = "Updates a family details",
+                  notes = "Returns family data or throws exception")
+    public Family updateFamily(@Nonnull @RequestBody Family family) {
+        return familyService.updateFamily(family);
+    }
+
+
 
     @DeleteMapping("/deleteById/{familyId}")
     @ApiOperation(value = "Delete family by id.",

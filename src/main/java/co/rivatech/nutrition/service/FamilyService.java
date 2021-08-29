@@ -250,4 +250,31 @@ public class FamilyService {
     public void deleteById(final int familyId) {
          familyRepository.deleteById(familyId);
     }
+
+    public Family updateFamily(final Family family) {
+        family.setUpdatedAt(new Date());
+        familyRepository.save(family);
+        saveOtherDetailsAsyncWithId(family.getDetails(), family.getId());
+        return family;
+    }
+
+    @Async
+    protected void saveOtherDetailsAsyncWithId(final FamilyDetails details, final int familyId) {
+        //TODO check if change in woman and child name needed.
+
+        final LocationDetails locationDetails = locationDetailsService.getLocationByFamilyId(familyId);
+        locationDetails.setDetails(details.getLocation());
+        locationDetails.setUpdatedAt(new Date());
+        locationDetailsService.save(locationDetails);
+
+        final OccupationDetails occupationDetails = occupationDetailsService.getOccupationByFamilyId(familyId);
+        occupationDetails.setDetails(details.getOccupation());
+        occupationDetails.setUpdatedAt(new Date());
+        occupationDetailsService.save(occupationDetails);
+
+        final FinancialDetails financialDetails = financialDetailsService.getFinancialDetailsByFamilyId(familyId);
+        financialDetails.setDetails(details.getFinance());
+        financialDetails.setUpdatedAt(new Date());
+        financialDetailsService.save(financialDetails);
+    }
 }

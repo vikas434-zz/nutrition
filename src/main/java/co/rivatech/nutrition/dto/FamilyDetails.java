@@ -60,5 +60,4 @@ public class FamilyDetails implements Serializable {
 
     private Finance finance;
 
-
 }

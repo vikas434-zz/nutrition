@@ -3,7 +3,6 @@ package co.rivatech.nutrition.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.rivatech.nutrition.exception.ResourceAlreadyExistsException;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.FinancialDetails;
 import co.rivatech.nutrition.repository.FinanceDetailsRepository;
@@ -25,11 +24,6 @@ public class FinancialDetailsService {
     }
 
     public FinancialDetails save(final FinancialDetails financialDetails) {
-        final int familyId = financialDetails.getFamilyId();
-        if (financeDetailsRepository.findByFamilyId(familyId).isPresent()) {
-            throw new ResourceAlreadyExistsException(String.format("Financial details already present for family id %s",
-                                                                   familyId));
-        }
         return financeDetailsRepository.save(financialDetails);
     }
 }
