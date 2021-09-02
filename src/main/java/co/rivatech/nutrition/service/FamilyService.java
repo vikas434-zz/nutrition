@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import co.rivatech.nutrition.dto.Children;
 import co.rivatech.nutrition.dto.Configs;
@@ -25,12 +26,18 @@ import co.rivatech.nutrition.dto.Location;
 import co.rivatech.nutrition.dto.Occupation;
 import co.rivatech.nutrition.dto.Women;
 import co.rivatech.nutrition.enums.Caste;
+import co.rivatech.nutrition.enums.CasteHindi;
 import co.rivatech.nutrition.enums.Entity;
 import co.rivatech.nutrition.enums.MemberWorkingOut;
+import co.rivatech.nutrition.enums.MemberWorkingOutHindi;
 import co.rivatech.nutrition.enums.Religion;
+import co.rivatech.nutrition.enums.ReligionHindi;
 import co.rivatech.nutrition.enums.Sex;
+import co.rivatech.nutrition.enums.SexHindi;
 import co.rivatech.nutrition.enums.WorkDuration;
+import co.rivatech.nutrition.enums.WorkDurationHindi;
 import co.rivatech.nutrition.enums.WorkLocation;
+import co.rivatech.nutrition.enums.WorkLocationHindi;
 import co.rivatech.nutrition.exception.MobileAlreadyExistsException;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Child;
@@ -92,7 +99,7 @@ public class FamilyService {
     public Family addFamily(final Family family) {
         validateFamilyData(family);
         family.setFamilyId(getShortId(family.getDetails()));
-        final Family savedData =  familyRepository.save(family);
+        final Family savedData = familyRepository.save(family);
         //TODO check why family id is not in increasing order.
         saveOtherDetailsAsync(savedData.getDetails(), savedData.getId());
         return savedData;
@@ -116,7 +123,7 @@ public class FamilyService {
         final List<Women> womanList = details.getWomenList();
         if (!CollectionUtils.isEmpty(womanList)) {
             final List<Woman> women = new ArrayList<>();
-            womanList.forEach(w->{
+            womanList.forEach(w -> {
                 final Woman woman = new Woman();
                 woman.setFamilyId(familyId);
                 woman.setName(w.getName());
@@ -205,12 +212,27 @@ public class FamilyService {
     public Configs getAllConfigs() {
         return Configs.builder()
                       .casteList(Arrays.asList(Caste.values()))
+                      .casteListHindi(Arrays.stream(CasteHindi.values())
+                                            .map(CasteHindi::valueOf)
+                                            .collect(Collectors.toList()))
                       .religionList(Arrays.asList(Religion.values()))
+                      .religionListHindi(Arrays.stream(ReligionHindi.values())
+                                               .map(ReligionHindi::valueOf)
+                                               .collect(Collectors.toList()))
                       .sexList(Arrays.asList(
                               Sex.values()))
+                      .sexListHindi(Arrays.stream(SexHindi.values()).map(SexHindi::valueOf)
+                                          .collect(Collectors.toList()))
                       .workLocations(Arrays.asList(WorkLocation.values()))
+                      .workLocationsHindi(Arrays.stream(WorkLocationHindi.values()).map(WorkLocationHindi::valueOf)
+                                                .collect(Collectors.toList()))
                       .workDurations(Arrays.asList(WorkDuration.values()))
+                      .workDurationsHindi(Arrays.stream(WorkDurationHindi.values()).map(WorkDurationHindi::valueOf)
+                                                .collect(Collectors.toList()))
                       .memberWorkingOutList(Arrays.asList(MemberWorkingOut.values()))
+                      .memberWorkingOutListHindi(Arrays.stream(MemberWorkingOutHindi.values())
+                                                       .map(MemberWorkingOutHindi::valueOf)
+                                                       .collect(Collectors.toList()))
                       .districts(districtService.getAllDistricts())
                       .blocks(blockService.getAllBlocks())
                       .panchayats(panchayatService.getAllPanchayats())
@@ -230,9 +252,10 @@ public class FamilyService {
     }
 
     public Family getFamilyDetailsByFullFamilyId(final String fullFamilyId) {
-        return familyRepository.findByFamilyId(fullFamilyId).orElseThrow(() -> new ResourceNotFoundException(String.format(
-                "No Family details found with full familyId %s ",
-                fullFamilyId)));
+        return familyRepository.findByFamilyId(fullFamilyId)
+                               .orElseThrow(() -> new ResourceNotFoundException(String.format(
+                                       "No Family details found with full familyId %s ",
+                                       fullFamilyId)));
     }
 
     public List<Family> getFamilyDetailsByFamilyHeadHindi(final String familyHead) {
@@ -248,7 +271,7 @@ public class FamilyService {
     }
 
     public void deleteById(final int familyId) {
-         familyRepository.deleteById(familyId);
+        familyRepository.deleteById(familyId);
     }
 
     public Family updateFamily(final Family family) {

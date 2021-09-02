@@ -26,15 +26,27 @@ public class Configs {
 
     private List<Caste> casteList;
 
+    private List<String> casteListHindi;
+
     private List<Religion> religionList;
+
+    private List<String> religionListHindi;
 
     private List<Sex> sexList;
 
+    private List<String> sexListHindi;
+
     private List<WorkLocation> workLocations;
+
+    private List<String> workLocationsHindi;
 
     private List<WorkDuration> workDurations;
 
+    private List<String> workDurationsHindi;
+
     private List<MemberWorkingOut> memberWorkingOutList;
+
+   private List<String> memberWorkingOutListHindi;
 
     private List<District> districts;
 
