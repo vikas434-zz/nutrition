@@ -18,11 +18,19 @@ public class FamilyDetails implements Serializable {
 
     private Sex sex;
 
+    private String sexHindi;
+
     private Caste caste;
+
+    private String casteHindi;
 
     private Religion religion;
 
+    private String religionHindi;
+
     private String otherReligion;
+
+    private String otherReligionHindi;
 
     private int totalMembers;
 

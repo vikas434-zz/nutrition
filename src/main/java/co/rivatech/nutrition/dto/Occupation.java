@@ -31,10 +31,19 @@ public class Occupation {
     private WorkLocation workLocation;
 
     @JsonIgnore
+    private String workLocationHindi;
+
+    @JsonIgnore
     private WorkDuration workDuration;
+
+    @JsonIgnore
+    private String workDurationHindi;
 
     private Boolean SHGConnection;
 
     @JsonIgnore
     private MemberWorkingOut memberWorkingOut;
+
+    @JsonIgnore
+    private String memberWorkingOutHindi;
 }
