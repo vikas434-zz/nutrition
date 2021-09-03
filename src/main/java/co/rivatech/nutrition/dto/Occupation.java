@@ -19,6 +19,9 @@ public class Occupation {
     @JsonIgnore
     private RationColor rationCardColor;
 
+    @JsonIgnore
+    private String rationCardColorHindi;
+
     private Boolean havingAgriLand;
 
     private Boolean havingMnregaCard;

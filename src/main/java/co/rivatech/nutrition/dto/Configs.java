@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.rivatech.nutrition.enums.Caste;
 import co.rivatech.nutrition.enums.MemberWorkingOut;
+import co.rivatech.nutrition.enums.RationColor;
 import co.rivatech.nutrition.enums.Religion;
 import co.rivatech.nutrition.enums.Sex;
 import co.rivatech.nutrition.enums.WorkDuration;
@@ -35,6 +36,10 @@ public class Configs {
     private List<Sex> sexList;
 
     private List<String> sexListHindi;
+
+    private List<RationColor> rationColors;
+
+    private List<String> rationColorsHindi;
 
     private List<WorkLocation> workLocations;
 

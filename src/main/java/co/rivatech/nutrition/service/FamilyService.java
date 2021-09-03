@@ -30,6 +30,8 @@ import co.rivatech.nutrition.enums.CasteHindi;
 import co.rivatech.nutrition.enums.Entity;
 import co.rivatech.nutrition.enums.MemberWorkingOut;
 import co.rivatech.nutrition.enums.MemberWorkingOutHindi;
+import co.rivatech.nutrition.enums.RationColor;
+import co.rivatech.nutrition.enums.RationColorHindi;
 import co.rivatech.nutrition.enums.Religion;
 import co.rivatech.nutrition.enums.ReligionHindi;
 import co.rivatech.nutrition.enums.Sex;
@@ -223,6 +225,9 @@ public class FamilyService {
                               Sex.values()))
                       .sexListHindi(Arrays.stream(SexHindi.values()).map(SexHindi::valueOf)
                                           .collect(Collectors.toList()))
+                      .rationColors(Arrays.asList(RationColor.values()))
+                      .rationColorsHindi(Arrays.stream(RationColorHindi.values()).map(RationColorHindi::valueOf)
+                                               .collect(Collectors.toList()))
                       .workLocations(Arrays.asList(WorkLocation.values()))
                       .workLocationsHindi(Arrays.stream(WorkLocationHindi.values()).map(WorkLocationHindi::valueOf)
                                                 .collect(Collectors.toList()))
