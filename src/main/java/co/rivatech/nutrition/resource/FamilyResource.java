@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 
 import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.service.FamilyService;
+import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -51,9 +52,13 @@ public class FamilyResource {
 
     @GetMapping("/getPaginatedFamilyData")
     @ApiOperation(value = "Get paginated family data by offset and limit")
-    public List<Family> getPaginatedFamilyData(@RequestParam(defaultValue = "0") Integer pageNo,
-                                               @RequestParam(defaultValue = "10") Integer pageSize,
-                                               @RequestParam(defaultValue = "id") String sortBy) {
+    public List<Family> getPaginatedFamilyData(@RequestParam(defaultValue = "0", required = false) Integer pageNo,
+                                               @RequestParam(defaultValue = "10", required = false) Integer pageSize,
+                                               @RequestParam(defaultValue = "id", required = false) String sortBy,
+                                               @RequestParam(required = false) BigInteger mobile,
+                                               @RequestParam(required = false) String familyHead,
+                                               @RequestParam(required = false) String familyHeadHindi,
+                                               @RequestParam(required = false) String fullFamilyId) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 
         Page<Family> pagedResult = familyService.findAll(paging);
@@ -61,9 +66,22 @@ public class FamilyResource {
         if (pagedResult.hasContent()) {
             return pagedResult.getContent();
         }
+        else if (null != mobile) {
+            return Collections.singletonList(familyService.checkMobileNumber(mobile));
+        }
+        else if (!StringUtil.isNullOrEmpty(familyHead)) {
+            return familyService.getFamilyDetailsByFamilyHead(familyHead);
+        }
+        else if (!StringUtil.isNullOrEmpty(familyHeadHindi)) {
+            return familyService.getFamilyDetailsByFamilyHeadHindi(familyHeadHindi);
+        }
+        else if (!StringUtil.isNullOrEmpty(fullFamilyId)) {
+            return Collections.singletonList(familyService.getFamilyDetailsByFullFamilyId(fullFamilyId));
+        }
         else {
             return Collections.emptyList();
         }
+
     }
 
     @GetMapping("/getFamilyByFullFamilyId/{fullFamilyId}")
@@ -97,7 +115,6 @@ public class FamilyResource {
     public Family updateFamily(@Nonnull @RequestBody Family family) {
         return familyService.updateFamily(family);
     }
-
 
 
     @DeleteMapping("/deleteById/{familyId}")
