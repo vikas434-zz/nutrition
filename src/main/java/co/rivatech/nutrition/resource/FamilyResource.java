@@ -51,20 +51,27 @@ public class FamilyResource {
     }
 
     @GetMapping("/getPaginatedFamilyData")
-    @ApiOperation(value = "Get paginated family data by offset and limit")
-    public List<Family> getPaginatedFamilyData(@RequestParam(defaultValue = "0", required = false) Integer pageNo,
-                                               @RequestParam(defaultValue = "10", required = false) Integer pageSize,
-                                               @RequestParam(defaultValue = "id", required = false) String sortBy,
+    @ApiOperation(value = "Get paginated family data by offset and limit. For getting the pagination, please pass all 3 values together" +
+            "i.e pageNo, pageSize and sortBy - id")
+    public List<Family> getPaginatedFamilyData(@RequestParam(required = false) Integer pageNo,
+                                               @RequestParam(required = false) Integer pageSize,
+                                               @RequestParam(required = false) String sortBy,
                                                @RequestParam(required = false) BigInteger mobile,
                                                @RequestParam(required = false) String familyHead,
                                                @RequestParam(required = false) String familyHeadHindi,
                                                @RequestParam(required = false) String fullFamilyId) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 
-        Page<Family> pagedResult = familyService.findAll(paging);
 
-        if (pagedResult.hasContent()) {
-            return pagedResult.getContent();
+        if (null != pageNo && null !=pageSize && !StringUtil.isNullOrEmpty(sortBy)) {
+            Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+            Page<Family> pagedResult = familyService.findAll(paging);
+            if(!pagedResult.isEmpty()) {
+                return pagedResult.getContent();
+            } else {
+                return Collections.emptyList();
+            }
+
         }
         else if (null != mobile) {
             return Collections.singletonList(familyService.checkMobileNumber(mobile));
