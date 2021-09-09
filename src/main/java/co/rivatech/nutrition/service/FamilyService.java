@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import co.rivatech.nutrition.dto.CasteConfig;
 import co.rivatech.nutrition.dto.Children;
 import co.rivatech.nutrition.dto.Configs;
 import co.rivatech.nutrition.dto.DistrictMaps;
@@ -213,10 +214,7 @@ public class FamilyService {
 
     public Configs getAllConfigs() {
         return Configs.builder()
-                      .casteList(Arrays.asList(Caste.values()))
-                      .casteListHindi(Arrays.stream(CasteHindi.values())
-                                            .map(CasteHindi::valueOf)
-                                            .collect(Collectors.toList()))
+                      .casteList(new CasteConfig())
                       .religionList(Arrays.asList(Religion.values()))
                       .religionListHindi(Arrays.stream(ReligionHindi.values())
                                                .map(ReligionHindi::valueOf)

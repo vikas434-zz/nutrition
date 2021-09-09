@@ -25,9 +25,7 @@ import lombok.Data;
 @Builder
 public class Configs {
 
-    private List<Caste> casteList;
-
-    private List<String> casteListHindi;
+    private CasteConfig casteList;
 
     private List<Religion> religionList;
 
