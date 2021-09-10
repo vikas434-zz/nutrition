@@ -4,7 +4,7 @@ package co.rivatech.nutrition.enums;
  * @author vranjan
  * created 09/08/2021
  */
-public enum ReligionHindi {
+public enum Religion {
     HINDU("हिंदू"),
     MUSLIM("मुस्लिम"),
     SARNA("सरना/आदिवासी"),
@@ -15,11 +15,11 @@ public enum ReligionHindi {
 
     private String hindiString;
 
-    ReligionHindi(String hindiString) {
+    Religion(String hindiString) {
         this.hindiString = hindiString;
     }
 
-    public static String valueOf(final ReligionHindi religionHindi) {
-        return religionHindi.hindiString;
+    public static String valueOf(final Religion religion) {
+        return religion.hindiString;
     }
 }

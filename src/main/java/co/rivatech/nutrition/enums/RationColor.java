@@ -4,7 +4,7 @@ package co.rivatech.nutrition.enums;
  * @author vranjan
  * created 22/08/2021
  */
-public enum RationColorHindi {
+public enum RationColor {
     PINK("गुलाबी"),
     YELLOW("पीला"),
     WHITE("उजला"),
@@ -12,11 +12,11 @@ public enum RationColorHindi {
 
     private String hindiString;
 
-    RationColorHindi(String hindiString) {
+    RationColor(String hindiString) {
         this.hindiString = hindiString;
     }
 
-    public static String valueOf(final RationColorHindi rationColorHindi) {
-        return rationColorHindi.hindiString;
+    public static String valueOf(final RationColor rationColor) {
+        return rationColor.hindiString;
     }
 }
