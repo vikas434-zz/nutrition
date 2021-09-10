@@ -10,12 +10,10 @@ import org.springframework.util.CollectionUtils;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import co.rivatech.nutrition.dto.CasteConfig;
 import co.rivatech.nutrition.dto.Children;
@@ -24,23 +22,15 @@ import co.rivatech.nutrition.dto.DistrictMaps;
 import co.rivatech.nutrition.dto.FamilyDetails;
 import co.rivatech.nutrition.dto.Finance;
 import co.rivatech.nutrition.dto.Location;
+import co.rivatech.nutrition.dto.MemberWorkingOutConfig;
 import co.rivatech.nutrition.dto.Occupation;
+import co.rivatech.nutrition.dto.RationConfig;
+import co.rivatech.nutrition.dto.ReligionConfig;
+import co.rivatech.nutrition.dto.SexConfig;
 import co.rivatech.nutrition.dto.Women;
-import co.rivatech.nutrition.enums.Caste;
-import co.rivatech.nutrition.enums.CasteHindi;
+import co.rivatech.nutrition.dto.WorkDurationConfig;
+import co.rivatech.nutrition.dto.WorkLocationConfig;
 import co.rivatech.nutrition.enums.Entity;
-import co.rivatech.nutrition.enums.MemberWorkingOut;
-import co.rivatech.nutrition.enums.MemberWorkingOutHindi;
-import co.rivatech.nutrition.enums.RationColor;
-import co.rivatech.nutrition.enums.RationColorHindi;
-import co.rivatech.nutrition.enums.Religion;
-import co.rivatech.nutrition.enums.ReligionHindi;
-import co.rivatech.nutrition.enums.Sex;
-import co.rivatech.nutrition.enums.SexHindi;
-import co.rivatech.nutrition.enums.WorkDuration;
-import co.rivatech.nutrition.enums.WorkDurationHindi;
-import co.rivatech.nutrition.enums.WorkLocation;
-import co.rivatech.nutrition.enums.WorkLocationHindi;
 import co.rivatech.nutrition.exception.MobileAlreadyExistsException;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Child;
@@ -214,28 +204,13 @@ public class FamilyService {
 
     public Configs getAllConfigs() {
         return Configs.builder()
-                      .casteList(new CasteConfig())
-                      .religionList(Arrays.asList(Religion.values()))
-                      .religionListHindi(Arrays.stream(ReligionHindi.values())
-                                               .map(ReligionHindi::valueOf)
-                                               .collect(Collectors.toList()))
-                      .sexList(Arrays.asList(
-                              Sex.values()))
-                      .sexListHindi(Arrays.stream(SexHindi.values()).map(SexHindi::valueOf)
-                                          .collect(Collectors.toList()))
-                      .rationColors(Arrays.asList(RationColor.values()))
-                      .rationColorsHindi(Arrays.stream(RationColorHindi.values()).map(RationColorHindi::valueOf)
-                                               .collect(Collectors.toList()))
-                      .workLocations(Arrays.asList(WorkLocation.values()))
-                      .workLocationsHindi(Arrays.stream(WorkLocationHindi.values()).map(WorkLocationHindi::valueOf)
-                                                .collect(Collectors.toList()))
-                      .workDurations(Arrays.asList(WorkDuration.values()))
-                      .workDurationsHindi(Arrays.stream(WorkDurationHindi.values()).map(WorkDurationHindi::valueOf)
-                                                .collect(Collectors.toList()))
-                      .memberWorkingOutList(Arrays.asList(MemberWorkingOut.values()))
-                      .memberWorkingOutListHindi(Arrays.stream(MemberWorkingOutHindi.values())
-                                                       .map(MemberWorkingOutHindi::valueOf)
-                                                       .collect(Collectors.toList()))
+                      .casteConfig(new CasteConfig())
+                      .religionConfig(new ReligionConfig())
+                      .sexConfig(new SexConfig())
+                      .rationConfig(new RationConfig())
+                      .workLocationConfig(new WorkLocationConfig())
+                      .workDurationConfig(new WorkDurationConfig())
+                      .memberWorkingOutConfig(new MemberWorkingOutConfig())
                       .districts(districtService.getAllDistricts())
                       .blocks(blockService.getAllBlocks())
                       .panchayats(panchayatService.getAllPanchayats())

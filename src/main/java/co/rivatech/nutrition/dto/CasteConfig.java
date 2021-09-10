@@ -16,7 +16,7 @@ import lombok.Data;
 public class CasteConfig {
     private List<Caste> castes = Arrays.asList(Caste.values());
 
-    private List<String> casteListHindi = Arrays.stream(CasteHindi.values())
-                                                .map(CasteHindi::valueOf)
-                                                .collect(Collectors.toList());
+    private List<String> casteHindi = Arrays.stream(CasteHindi.values())
+                                            .map(CasteHindi::valueOf)
+                                            .collect(Collectors.toList());
 }
