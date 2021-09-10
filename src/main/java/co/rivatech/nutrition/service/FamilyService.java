@@ -15,21 +15,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import co.rivatech.nutrition.dto.CasteConfig;
 import co.rivatech.nutrition.dto.Children;
+import co.rivatech.nutrition.dto.ConfigSource;
 import co.rivatech.nutrition.dto.Configs;
 import co.rivatech.nutrition.dto.DistrictMaps;
 import co.rivatech.nutrition.dto.FamilyDetails;
 import co.rivatech.nutrition.dto.Finance;
 import co.rivatech.nutrition.dto.Location;
-import co.rivatech.nutrition.dto.MemberWorkingOutConfig;
 import co.rivatech.nutrition.dto.Occupation;
-import co.rivatech.nutrition.dto.RationConfig;
-import co.rivatech.nutrition.dto.ReligionConfig;
-import co.rivatech.nutrition.dto.SexConfig;
 import co.rivatech.nutrition.dto.Women;
-import co.rivatech.nutrition.dto.WorkDurationConfig;
-import co.rivatech.nutrition.dto.WorkLocationConfig;
 import co.rivatech.nutrition.enums.Entity;
 import co.rivatech.nutrition.exception.MobileAlreadyExistsException;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
@@ -204,13 +198,13 @@ public class FamilyService {
 
     public Configs getAllConfigs() {
         return Configs.builder()
-                      .casteConfig(new CasteConfig())
-                      .religionConfig(new ReligionConfig())
-                      .sexConfig(new SexConfig())
-                      .rationConfig(new RationConfig())
-                      .workLocationConfig(new WorkLocationConfig())
-                      .workDurationConfig(new WorkDurationConfig())
-                      .memberWorkingOutConfig(new MemberWorkingOutConfig())
+                      .casteConfig(ConfigSource.getCasteList())
+                      .religionConfig(ConfigSource.getReligionList())
+                      .sexConfig(ConfigSource.getSexList())
+                      .rationConfig(ConfigSource.getRationColorList())
+                      .workLocationConfig(ConfigSource.workLocationList())
+                      .workDurationConfig(ConfigSource.workDurationList())
+                      .memberWorkingOutConfig(ConfigSource.MemberWorkingOutList())
                       .districts(districtService.getAllDistricts())
                       .blocks(blockService.getAllBlocks())
                       .panchayats(panchayatService.getAllPanchayats())

@@ -18,19 +18,19 @@ import lombok.Data;
 @Builder
 public class Configs {
 
-    private CasteConfig casteConfig;
+    private List<GeneralConfig> casteConfig;
 
-    private ReligionConfig religionConfig;
+    private List<GeneralConfig> religionConfig;
 
-    private SexConfig sexConfig;
+    private List<GeneralConfig> sexConfig;
 
-    private RationConfig rationConfig;
+    private List<GeneralConfig> rationConfig;
 
-    private WorkLocationConfig workLocationConfig;
+    private List<GeneralConfig> workLocationConfig;
 
-    private WorkDurationConfig workDurationConfig;
+    private List<GeneralConfig> workDurationConfig;
 
-    private MemberWorkingOutConfig memberWorkingOutConfig;
+    private List<GeneralConfig> memberWorkingOutConfig;
 
     private List<District> districts;
 
