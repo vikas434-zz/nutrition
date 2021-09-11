@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import co.rivatech.nutrition.dto.StudentData;
+import co.rivatech.nutrition.dto.ChildData;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -40,6 +40,6 @@ public class DailyAttendence {
     @Type(type = "jsonb")
     @Column(name = "student_data")
     @ApiModelProperty(value = "Student data")
-    private List<StudentData> studentDataList;
+    private List<ChildData> childDataList;
 
 }

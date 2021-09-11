@@ -30,6 +30,10 @@ public class Child {
     @ApiModelProperty(value = "Family id", required = true)
     private int familyId;
 
+    @Column(name = "tola_id")
+    @ApiModelProperty(value = "Anganwadi id", required = true)
+    private int tolaId;
+
     @JsonIgnore
     @Column(name = "created_at")
     private Date createdAt;

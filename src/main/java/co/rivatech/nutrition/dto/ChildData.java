@@ -8,12 +8,12 @@ import lombok.Data;
  * created 29/08/2021
  */
 @Data
-public class StudentData {
+public class ChildData {
     private String name;
 
     private String nameHindi;
 
-    private String studentId;
+    private int childId;
 
     private AttendanceStatus status;
 }

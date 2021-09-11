@@ -15,4 +15,6 @@ import co.rivatech.nutrition.model.Child;
 public interface ChildRepository extends CrudRepository<Child, Integer> {
 
     List<Child> findByFamilyId(final int familyId);
+
+    List<Child> findByTolaId(final int tolaId);
 }

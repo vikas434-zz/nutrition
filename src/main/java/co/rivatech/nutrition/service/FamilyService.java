@@ -102,6 +102,7 @@ public class FamilyService {
                 child.setFamilyId(familyId);
                 child.setName(c.getName());
                 child.setNameHindi(c.getNameHindi());
+                child.setTolaId(1);//TODO get the tola id.
                 children.add(child);
             });
             childService.addAllChild(children);
