@@ -44,6 +44,14 @@ public class Configs {
 
     private List<GeneralConfig> vaccinationConfig;
 
+    private List<GeneralConfig> motherEducationConfig;
+
+    private List<GeneralConfig> motherMaritalStatusConfig;
+
+    private List<GeneralConfig> motherFirstFoodToKid;
+
+    private List<GeneralConfig> motherFirstBreastFeeding;
+
     private List<District> districts;
 
     private List<Block> blocks;

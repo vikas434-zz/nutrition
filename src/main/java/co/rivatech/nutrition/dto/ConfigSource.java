@@ -9,7 +9,11 @@ import co.rivatech.nutrition.enums.DeliveryType;
 import co.rivatech.nutrition.enums.FirstFood;
 import co.rivatech.nutrition.enums.FirstWater;
 import co.rivatech.nutrition.enums.FirstWaterReason;
+import co.rivatech.nutrition.enums.MotherChildBreastFeeding;
+import co.rivatech.nutrition.enums.MotherChildFirstFood;
+import co.rivatech.nutrition.enums.MotherMaritalStatus;
 import co.rivatech.nutrition.enums.MemberWorkingOut;
+import co.rivatech.nutrition.enums.MotherHigherEducation;
 import co.rivatech.nutrition.enums.PlaceOfBirth;
 import co.rivatech.nutrition.enums.RationColor;
 import co.rivatech.nutrition.enums.Religion;
@@ -127,6 +131,38 @@ public class ConfigSource {
         final List<GeneralConfig> generalConfigs = new ArrayList<>();
         Arrays.stream(Vaccination.values()).forEach(c -> {
             generalConfigs.add(new GeneralConfig(c.name(), Vaccination.valueOf(c)));
+        });
+        return generalConfigs;
+    }
+
+    public static List<GeneralConfig> MotherEducationList() {
+        final List<GeneralConfig> generalConfigs = new ArrayList<>();
+        Arrays.stream(MotherHigherEducation.values()).forEach(c -> {
+            generalConfigs.add(new GeneralConfig(c.name(), MotherHigherEducation.valueOf(c)));
+        });
+        return generalConfigs;
+    }
+
+    public static List<GeneralConfig> MotherMaritalStatusList() {
+        final List<GeneralConfig> generalConfigs = new ArrayList<>();
+        Arrays.stream(MotherMaritalStatus.values()).forEach(c -> {
+            generalConfigs.add(new GeneralConfig(c.name(), MotherMaritalStatus.valueOf(c)));
+        });
+        return generalConfigs;
+    }
+
+    public static List<GeneralConfig> MotherFirstFoodToKidList() {
+        final List<GeneralConfig> generalConfigs = new ArrayList<>();
+        Arrays.stream(MotherChildFirstFood.values()).forEach(c -> {
+            generalConfigs.add(new GeneralConfig(c.name(), MotherChildFirstFood.valueOf(c)));
+        });
+        return generalConfigs;
+    }
+
+    public static List<GeneralConfig> MotherFirstBreastFeedingList() {
+        final List<GeneralConfig> generalConfigs = new ArrayList<>();
+        Arrays.stream(MotherChildBreastFeeding.values()).forEach(c -> {
+            generalConfigs.add(new GeneralConfig(c.name(), MotherChildBreastFeeding.valueOf(c)));
         });
         return generalConfigs;
     }

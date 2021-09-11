@@ -7,6 +7,8 @@ import java.util.List;
 
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Woman;
+import co.rivatech.nutrition.model.WomanDetails;
+import co.rivatech.nutrition.repository.WomanDetailsRepository;
 import co.rivatech.nutrition.repository.WomanRepository;
 
 /**
@@ -19,6 +21,9 @@ public class WomanService {
     @Autowired
     private WomanRepository womanRepository;
 
+    @Autowired
+    private WomanDetailsRepository womanDetailsRepository;
+
     public Woman addWoman(final Woman woman) {
         return womanRepository.save(woman);
     }
@@ -28,10 +33,14 @@ public class WomanService {
     }
 
     public List<Woman> getWomanByFamilyId(final int familyId) {
-        final List<Woman> woman =  womanRepository.findByFamilyId(familyId);
-        if(woman.isEmpty()) {
+        final List<Woman> woman = womanRepository.findByFamilyId(familyId);
+        if (woman.isEmpty()) {
             throw new ResourceNotFoundException(String.format("No woman details found for family id %s", familyId));
         }
         return woman;
+    }
+
+    public WomanDetails addWomanDetails(final WomanDetails womanDetails) {
+        return womanDetailsRepository.save(womanDetails);
     }
 }
