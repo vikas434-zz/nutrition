@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import co.rivatech.nutrition.model.Child;
+import co.rivatech.nutrition.model.ChildDetails;
 import co.rivatech.nutrition.service.ChildService;
 import io.swagger.annotations.ApiOperation;
 
@@ -28,10 +29,18 @@ public class ChildResource {
     private ChildService childService;
 
     @PostMapping("/add")
-    @ApiOperation(value = "Adds a child details to the family")
+    @ApiOperation(value = "Adds a child to the family")
     public Child addChild(@Nonnull @RequestBody Child child) {
         return childService.addChild(child);
     }
+
+    @PostMapping("/add_details")
+    @ApiOperation(value = "Adds a child details to the family")
+    public ChildDetails addChildDetails(@Nonnull @RequestBody ChildDetails childDetails) {
+        return childService.addChildDetails(childDetails);
+    }
+
+    //Update children
 
     @GetMapping("/getByFamilyId/{familyId}")
     @ApiOperation(value = "Gets details of the child by familyId, e.g. ")

@@ -32,6 +32,18 @@ public class Configs {
 
     private List<GeneralConfig> memberWorkingOutConfig;
 
+    private List<GeneralConfig> placeOfBirthConfig;
+
+    private List<GeneralConfig> deliveryTypeConfig;
+
+    private List<GeneralConfig> firstWaterConfig;
+
+    private List<GeneralConfig> firstWaterReasonConfig;
+
+    private List<GeneralConfig> firstFoodConfig;
+
+    private List<GeneralConfig> vaccinationConfig;
+
     private List<District> districts;
 
     private List<Block> blocks;
