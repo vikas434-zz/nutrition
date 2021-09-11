@@ -33,4 +33,6 @@ public class ChildDetailsJson {
 
     private FirstFoodDetails firstFoodDetails;
 
+    private ChildOtherDetails childOtherDetails;
+
 }
