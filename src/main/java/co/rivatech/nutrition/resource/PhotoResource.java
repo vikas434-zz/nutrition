@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Nonnull;
 
-import co.rivatech.nutrition.dto.ImageData;
+import co.rivatech.nutrition.dto.UploadImageData;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -20,13 +20,13 @@ public class PhotoResource {
 
     @PostMapping("/beforeMeal")
     @ApiOperation(value = "[WIP] Upload photo before meal.", notes = "Upload todays photo only. No option to edit")
-    public boolean uploadPhotoBeforeMeal(@Nonnull @RequestBody ImageData data) {
+    public boolean uploadPhotoBeforeMeal(@Nonnull @RequestBody UploadImageData data) {
         return false;
     }
 
     @PostMapping("/duringMeal")
     @ApiOperation(value = "[WIP] Upload photo during meal.", notes = "Upload todays photo only. No option to edit")
-    public boolean uploadPhotoAfterMeal(@Nonnull @RequestBody ImageData data) {
+    public boolean uploadPhotoAfterMeal(@Nonnull @RequestBody UploadImageData data) {
         return false;
     }
 }

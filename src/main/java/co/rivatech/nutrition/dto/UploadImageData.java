@@ -9,7 +9,7 @@ import lombok.Data;
  * created 29/08/2021
  */
 @Data
-public class ImageData {
+public class UploadImageData {
     private String title;
 
     private String description;
