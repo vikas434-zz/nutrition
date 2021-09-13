@@ -35,10 +35,12 @@ public class User {
     private int id;
 
     @Column(name = "email")
-    @ApiModelProperty(value = "Email id of the user", required = false)
+    @ApiModelProperty(value = "Email id of the user",
+                      required = false)
     private String email;
 
-    @ApiModelProperty(value = "mobile the user", required = true)
+    @ApiModelProperty(value = "mobile the user",
+                      required = true)
     @Column(name = "mobile")
     private BigInteger mobile;
 
@@ -48,11 +50,23 @@ public class User {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @ApiModelProperty(value = "Name of the user", required = true)
+    @ApiModelProperty(value = "Name of the user",
+                      required = true)
     @Column(name = "name")
     private String name;
 
-    @ApiModelProperty(value = "Name of the user in hindi", required = true)
+    @ApiModelProperty(value = "Name of the user in hindi",
+                      required = true)
     @Column(name = "name_hi")
     private String nameHindi;
+
+    @ApiModelProperty(value = "ROLE_SUPER_ADMIN,\n" +
+            "    ROLE_DISTRICT,\n" +
+            "    ROLE_BLOCK,\n" +
+            "    ROLE_ANGAWADI,\n" +
+            "    ROLE_SURVEYOR",
+                      required = true)
+    @Column(name = "role")
+    private String role;
+
 }
