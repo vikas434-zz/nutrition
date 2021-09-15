@@ -16,8 +16,10 @@ import lombok.Data;
 public class Occupation {
     private Boolean havingRationCard;
 
+    @JsonIgnore
     private RationColor rationCardColor;
 
+    @JsonIgnore
     private String rationCardColorHindi;
 
     private Boolean havingAgriLand;

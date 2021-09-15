@@ -22,6 +22,8 @@ public class MotherDetails {
 
     private String maritalStatusHindi;
 
+    private Boolean midDayMealBenefit;
+
     private int totalKids;
 
     private int totalKidsUpTo60Months;
