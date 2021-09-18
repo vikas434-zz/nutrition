@@ -27,8 +27,11 @@ public class LMS {
     @Column(name = "short_description")
     private String shortDescription;
 
-    @Column(name = "url")
-    private String url;
+    @Column(name = "video_url")
+    private String videoUrl;
+
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
 
     @Column(name = "created_at")
     private Date createdAt;
