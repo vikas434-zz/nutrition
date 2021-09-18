@@ -248,7 +248,7 @@ public class FamilyService {
         familyFullDetails.setChildFullDetailsJson(childDetails);
 
         final List<WomanDetails> womanDetails = womanService.getWomanDetailsByFamilyId(familyId);
-        familyFullDetails.setWomanDetailsJson(womanDetails);
+        familyFullDetails.setWomanFullDetailsJson(womanDetails);
 
         return familyFullDetails;
     }
