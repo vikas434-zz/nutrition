@@ -43,4 +43,8 @@ public class ChildService {
     public ChildDetails addChildDetails(final ChildDetails childDetails) {
         return childDetailsRepository.save(childDetails);
     }
+
+    public List<ChildDetails> findByFamilyId(final int familyId) {
+        return childDetailsRepository.findByFamilyId(familyId);
+    }
 }

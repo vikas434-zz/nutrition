@@ -43,4 +43,9 @@ public class WomanService {
     public WomanDetails addWomanDetails(final WomanDetails womanDetails) {
         return womanDetailsRepository.save(womanDetails);
     }
+
+    public List<WomanDetails> getWomanDetailsByFamilyId(final int familyId){
+        return womanDetailsRepository.findByFamilyId(familyId);
+    }
+
 }

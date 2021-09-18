@@ -28,11 +28,13 @@ import co.rivatech.nutrition.enums.Entity;
 import co.rivatech.nutrition.exception.MobileAlreadyExistsException;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Child;
+import co.rivatech.nutrition.model.ChildDetails;
 import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.model.FinancialDetails;
 import co.rivatech.nutrition.model.LocationDetails;
 import co.rivatech.nutrition.model.OccupationDetails;
 import co.rivatech.nutrition.model.Woman;
+import co.rivatech.nutrition.model.WomanDetails;
 import co.rivatech.nutrition.repository.FamilyRepository;
 import co.rivatech.nutrition.repository.ShortNameMapRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -235,10 +237,20 @@ public class FamilyService {
     }
 
     public Family getFamilyDetailsByFullFamilyId(final String fullFamilyId) {
-        return familyRepository.findByFamilyId(fullFamilyId)
-                               .orElseThrow(() -> new ResourceNotFoundException(String.format(
-                                       "No Family details found with full familyId %s ",
-                                       fullFamilyId)));
+        final Family familyFullDetails = familyRepository.findByFamilyId(fullFamilyId)
+                                                         .orElseThrow(() -> new ResourceNotFoundException(
+                                                                 String.format(
+                                                                         "No Family details found with full familyId %s ",
+                                                                         fullFamilyId)));
+        final int familyId = familyFullDetails.getId();
+
+        final List<ChildDetails> childDetails = childService.findByFamilyId(familyId);
+        familyFullDetails.setChildFullDetailsJson(childDetails);
+
+        final List<WomanDetails> womanDetails = womanService.getWomanDetailsByFamilyId(familyId);
+        familyFullDetails.setWomanDetailsJson(womanDetails);
+
+        return familyFullDetails;
     }
 
     public List<Family> getFamilyDetailsByFamilyHeadHindi(final String familyHead) {

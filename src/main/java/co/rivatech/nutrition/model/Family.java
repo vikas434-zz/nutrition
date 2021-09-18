@@ -40,8 +40,9 @@ import lombok.Data;
  */
 @Data
 @Entity(name = "family")
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class Family {
+@TypeDef(name = "jsonb",
+         typeClass = JsonBinaryType.class)
+public class Family extends FamilyFullDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -72,7 +73,8 @@ public class Family {
     private BigInteger mobile;
 
     @Type(type = "jsonb")
-    @Column(name = "details_json", columnDefinition = "jsonb")
+    @Column(name = "details_json",
+            columnDefinition = "jsonb")
     @ApiModelProperty(value = "details_json",
                       required = true)
     private FamilyDetails details;
