@@ -1,13 +1,14 @@
 package co.rivatech.nutrition.resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Nonnull;
-
-import co.rivatech.nutrition.dto.UploadImageData;
+import co.rivatech.nutrition.enums.MEALTYPE;
+import co.rivatech.nutrition.service.AWSS3Service;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -18,15 +19,24 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/v1/photo")
 public class PhotoResource {
 
+    @Autowired
+    private AWSS3Service awss3Service;
+
     @PostMapping("/beforeMeal")
-    @ApiOperation(value = "[WIP] Upload photo before meal.", notes = "Upload todays photo only. No option to edit")
-    public boolean uploadPhotoBeforeMeal(@Nonnull @RequestBody UploadImageData data) {
-        return false;
+    @ApiOperation(value = "Upload photo before meal.",
+                  notes = "Upload today's photo. Also, please give full name of the path" +
+                          " e.g. bokaro-bermo-lalganj-kamleshpur-khunti, i.e. from district to tola")
+    public String uploadPhotoBeforeMeal(@RequestParam(value = "file") MultipartFile file,
+                                        @RequestParam(value = "path") String path) {
+        return awss3Service.uploadFile(file, path, MEALTYPE.BEFORE_MEAL);
     }
 
     @PostMapping("/duringMeal")
-    @ApiOperation(value = "[WIP] Upload photo during meal.", notes = "Upload todays photo only. No option to edit")
-    public boolean uploadPhotoAfterMeal(@Nonnull @RequestBody UploadImageData data) {
-        return false;
+    @ApiOperation(value = "Upload photo before meal.",
+                  notes = "Upload today's photo. Also, please give full name of the path" +
+                          " e.g. bokaro-bermo-lalganj-kamleshpur-khunti, i.e. from district to tola")
+    public String uploadPhotoAfterMeal(@RequestParam(value = "file") MultipartFile file,
+                                       @RequestParam(value = "path") String path) {
+        return awss3Service.uploadFile(file, path, MEALTYPE.AFTER_MEAL);
     }
 }
