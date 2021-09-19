@@ -2,6 +2,7 @@ package co.rivatech.nutrition.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import co.rivatech.nutrition.model.LMS;
+import co.rivatech.nutrition.model.LMSEvaluation;
+import co.rivatech.nutrition.model.LMSQnA;
 import co.rivatech.nutrition.service.LMSService;
 import io.swagger.annotations.ApiOperation;
 
@@ -40,5 +43,29 @@ public class LMSResource {
                                 @RequestParam(defaultValue = "10") Integer pageSize,
                                 @RequestParam(defaultValue = "id") String sortBy) {
         return lmsService.getPaginatedLMS(pageNo, pageSize, sortBy);
+    }
+
+    @GetMapping("/getLMSEvaluationForUser/{userId}")
+    @ApiOperation(value = "It returns lms evaluation details for a user id.")
+    public List<LMSEvaluation> getLMSData(@PathVariable int userId) {
+        return lmsService.getLmsEvaluationsForAUser(userId);
+    }
+
+    @PostMapping("/addLMSEvaluationForUser")
+    @ApiOperation(value = "It adds lms evaluation for a user")
+    public LMSEvaluation addLMSEvaluation(@RequestBody LMSEvaluation lmsEvaluation) {
+        return lmsService.saveLmsEvaluation(lmsEvaluation);
+    }
+
+    @PostMapping("/addLMSQnA")
+    @ApiOperation(value = "It adds lms Qustion and answer for a given LMS")
+    public LMSQnA addLMSQnA(@RequestBody LMSQnA lmsQnA) {
+        return lmsService.saveLmsQnA(lmsQnA);
+    }
+
+    @GetMapping("/getLMSQnAByLmsId/{lmsId}")
+    @ApiOperation(value = "Gets list of all LMS qustion and answer to be used for evaluation.")
+    public List<LMSQnA> getLmsQnAByLmsId(@PathVariable int lmsId) {
+        return lmsService.geLMSQnAByLmsId(lmsId);
     }
 }

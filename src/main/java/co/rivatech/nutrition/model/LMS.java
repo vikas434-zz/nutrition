@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -22,15 +23,19 @@ public class LMS {
     private int id;
 
     @Column(name = "title")
+    @ApiModelProperty(value = "Title of the LMS", required = true)
     private String title;
 
     @Column(name = "short_description")
+    @ApiModelProperty(value = "Short description of the LMS", required = true)
     private String shortDescription;
 
     @Column(name = "video_url")
+    @ApiModelProperty(value = "Video URL of the LMS", required = true)
     private String videoUrl;
 
     @Column(name = "thumbnail_url")
+    @ApiModelProperty(value = "Thumbnail URL of the LMS", required = true)
     private String thumbnailUrl;
 
     @Column(name = "created_at")
