@@ -17,6 +17,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import co.rivatech.nutrition.dto.UploadImageResponse;
 import co.rivatech.nutrition.enums.MEALTYPE;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,13 +37,13 @@ public class AWSS3Service {
     @Autowired
     private AmazonS3 s3Client;
 
-    public String uploadFile(final MultipartFile file, String path, MEALTYPE mealtype) {
+    public UploadImageResponse uploadFile(final MultipartFile file, String path, MEALTYPE mealtype) {
         File fileObj = convertMultiPartFileToFile(file);
         String fileName = dtfDate.format(LocalDate.ofInstant(Instant.now(),
                                                              ZoneId.systemDefault())) + "_" + file.getOriginalFilename();
         s3Client.putObject(new PutObjectRequest(bucketName + DIV + path + DIV + mealtype, fileName, fileObj));
         fileObj.delete();
-        return "File uploaded : " + fileName;
+        return new UploadImageResponse(fileName, path, mealtype);
     }
 
     private File convertMultiPartFileToFile(final MultipartFile file) {

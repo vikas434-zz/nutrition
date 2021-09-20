@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import co.rivatech.nutrition.dto.UploadImageResponse;
 import co.rivatech.nutrition.enums.MEALTYPE;
 import co.rivatech.nutrition.service.AWSS3Service;
 import io.swagger.annotations.ApiOperation;
@@ -26,8 +27,8 @@ public class PhotoResource {
     @ApiOperation(value = "Upload photo before meal.",
                   notes = "Upload today's photo. Also, please give full name of the path" +
                           " e.g. bokaro-bermo-lalganj-kamleshpur-khunti, i.e. from district to tola")
-    public String uploadPhotoBeforeMeal(@RequestParam(value = "file") MultipartFile file,
-                                        @RequestParam(value = "path") String path) {
+    public UploadImageResponse uploadPhotoBeforeMeal(@RequestParam(value = "file") MultipartFile file,
+                                                     @RequestParam(value = "path") String path) {
         return awss3Service.uploadFile(file, path, MEALTYPE.BEFORE_MEAL);
     }
 
@@ -35,8 +36,8 @@ public class PhotoResource {
     @ApiOperation(value = "Upload photo before meal.",
                   notes = "Upload today's photo. Also, please give full name of the path" +
                           " e.g. bokaro-bermo-lalganj-kamleshpur-khunti, i.e. from district to tola")
-    public String uploadPhotoAfterMeal(@RequestParam(value = "file") MultipartFile file,
-                                       @RequestParam(value = "path") String path) {
+    public UploadImageResponse uploadPhotoAfterMeal(@RequestParam(value = "file") MultipartFile file,
+                                                    @RequestParam(value = "path") String path) {
         return awss3Service.uploadFile(file, path, MEALTYPE.AFTER_MEAL);
     }
 }
