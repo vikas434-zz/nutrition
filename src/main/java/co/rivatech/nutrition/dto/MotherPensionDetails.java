@@ -10,5 +10,5 @@ import lombok.Data;
 public class MotherPensionDetails {
     private Boolean PMVY;
 
-    private Boolean windowerPension;
+    private Boolean widowerPension;
 }
