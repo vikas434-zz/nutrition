@@ -4,12 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+import co.rivatech.nutrition.constatnts.DateUtil;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Child;
 import co.rivatech.nutrition.model.ChildDetails;
+import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.repository.ChildDetailsRepository;
 import co.rivatech.nutrition.repository.ChildRepository;
+import co.rivatech.nutrition.repository.FamilyRepository;
 
 /**
  * @author vranjan
@@ -23,6 +27,9 @@ public class ChildService {
 
     @Autowired
     private ChildDetailsRepository childDetailsRepository;
+
+    @Autowired
+    private FamilyRepository familyRepository;
 
     public Child addChild(final Child child) {
         return childRepository.save(child);
@@ -41,7 +48,11 @@ public class ChildService {
     }
 
     public ChildDetails addChildDetails(final ChildDetails childDetails) {
-        return childDetailsRepository.save(childDetails);
+        final ChildDetails details =  childDetailsRepository.save(childDetails);
+        final Optional<Family> familyOptional = familyRepository.findById(childDetails.getFamilyId());
+        familyOptional.ifPresent(family -> details.setFullFamilyId(family.getFamilyId()));
+        details.setDobFormatted(DateUtil.getFormat().format(childDetails.getChildDetailsJson().getDob()));
+        return details;
     }
 
     public List<ChildDetails> findByFamilyId(final int familyId) {

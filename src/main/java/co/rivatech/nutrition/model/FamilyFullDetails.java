@@ -12,6 +12,6 @@ import lombok.Data;
 public class FamilyFullDetails {
     private List<ChildDetails> childFullDetailsJson;
 
-    private List<WomanDetails> womanFullDetailsJson;
+    private List<WomanDetailsWithFamilyName> womanFullDetailsJson;
 
 }

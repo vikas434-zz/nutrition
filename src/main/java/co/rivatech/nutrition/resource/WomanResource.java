@@ -13,7 +13,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import co.rivatech.nutrition.model.Woman;
-import co.rivatech.nutrition.model.WomanDetails;
+import co.rivatech.nutrition.model.WomanDetailsWithFamilyName;
 import co.rivatech.nutrition.service.WomanService;
 import io.swagger.annotations.ApiOperation;
 
@@ -36,7 +36,7 @@ public class WomanResource {
 
     @PostMapping("/add_details")
     @ApiOperation(value = "Adds woman details to the family")
-    public WomanDetails addWomanDetails(@Nonnull @RequestBody WomanDetails womanDetails) {
+    public WomanDetailsWithFamilyName addWomanDetails(@Nonnull @RequestBody WomanDetailsWithFamilyName womanDetails) {
         return womanService.addWomanDetails(womanDetails);
     }
 

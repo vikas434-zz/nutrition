@@ -13,7 +13,7 @@ import lombok.Data;
 public class UploadImageResponse {
     private String fileName;
 
-    private String path;
+    private int tolaId;
 
     private MEALTYPE mealtype;
 }

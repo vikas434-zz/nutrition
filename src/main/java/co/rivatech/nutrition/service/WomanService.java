@@ -3,11 +3,16 @@ package co.rivatech.nutrition.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import co.rivatech.nutrition.constatnts.DateUtil;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
+import co.rivatech.nutrition.model.Family;
 import co.rivatech.nutrition.model.Woman;
-import co.rivatech.nutrition.model.WomanDetails;
+import co.rivatech.nutrition.model.WomanDetailsWithFamilyName;
+import co.rivatech.nutrition.repository.FamilyRepository;
 import co.rivatech.nutrition.repository.WomanDetailsRepository;
 import co.rivatech.nutrition.repository.WomanRepository;
 
@@ -23,6 +28,9 @@ public class WomanService {
 
     @Autowired
     private WomanDetailsRepository womanDetailsRepository;
+
+    @Autowired
+    private FamilyRepository familyRepository;
 
     public Woman addWoman(final Woman woman) {
         return womanRepository.save(woman);
@@ -40,11 +48,16 @@ public class WomanService {
         return woman;
     }
 
-    public WomanDetails addWomanDetails(final WomanDetails womanDetails) {
-        return womanDetailsRepository.save(womanDetails);
+    public WomanDetailsWithFamilyName addWomanDetails(final WomanDetailsWithFamilyName womanDetails) {
+        final WomanDetailsWithFamilyName womanDetailsWithFamilyName = womanDetailsRepository.save(womanDetails);
+        final Date dob = womanDetailsWithFamilyName.getWomanDetailsJson().getDob();
+        womanDetailsWithFamilyName.setDobFormatted(DateUtil.getFormat().format(dob));
+        final Optional<Family> familyOptional = familyRepository.findById(womanDetails.getFamilyId());
+        familyOptional.ifPresent(family -> womanDetailsWithFamilyName.setFullFamilyId(family.getFamilyId()));
+        return womanDetailsWithFamilyName;
     }
 
-    public List<WomanDetails> getWomanDetailsByFamilyId(final int familyId){
+    public List<WomanDetailsWithFamilyName> getWomanDetailsByFamilyId(final int familyId) {
         return womanDetailsRepository.findByFamilyId(familyId);
     }
 

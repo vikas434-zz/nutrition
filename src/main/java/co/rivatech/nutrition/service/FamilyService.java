@@ -34,7 +34,7 @@ import co.rivatech.nutrition.model.FinancialDetails;
 import co.rivatech.nutrition.model.LocationDetails;
 import co.rivatech.nutrition.model.OccupationDetails;
 import co.rivatech.nutrition.model.Woman;
-import co.rivatech.nutrition.model.WomanDetails;
+import co.rivatech.nutrition.model.WomanDetailsWithFamilyName;
 import co.rivatech.nutrition.repository.FamilyRepository;
 import co.rivatech.nutrition.repository.ShortNameMapRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -247,7 +247,7 @@ public class FamilyService {
         final List<ChildDetails> childDetails = childService.findByFamilyId(familyId);
         familyFullDetails.setChildFullDetailsJson(childDetails);
 
-        final List<WomanDetails> womanDetails = womanService.getWomanDetailsByFamilyId(familyId);
+        final List<WomanDetailsWithFamilyName> womanDetails = womanService.getWomanDetailsByFamilyId(familyId);
         familyFullDetails.setWomanFullDetailsJson(womanDetails);
 
         return familyFullDetails;

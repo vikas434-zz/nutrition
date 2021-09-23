@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import co.rivatech.nutrition.dto.ChildDetailsJson;
+import co.rivatech.nutrition.dto.DetailsWithFamilyName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -26,7 +27,7 @@ import lombok.Data;
 @Data
 @Entity(name = "child_details")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class ChildDetails {
+public class ChildDetails extends DetailsWithFamilyName {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @ApiModelProperty(value = "Child details Id")

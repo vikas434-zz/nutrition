@@ -14,4 +14,8 @@ public class DateUtil {
         final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date);
     }
+
+    public static SimpleDateFormat getFormat() {
+        return new SimpleDateFormat("yyyy-MM-dd");
+    }
 }

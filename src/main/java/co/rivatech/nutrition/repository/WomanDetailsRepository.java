@@ -5,14 +5,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import co.rivatech.nutrition.model.WomanDetails;
+import co.rivatech.nutrition.model.WomanDetailsWithFamilyName;
 
 /**
  * @author vranjan
  * created 18/08/2021
  */
 @Repository
-public interface WomanDetailsRepository extends CrudRepository<WomanDetails, Integer> {
+public interface WomanDetailsRepository extends CrudRepository<WomanDetailsWithFamilyName, Integer> {
 
-    List<WomanDetails> findByFamilyId(int familyId);
+    List<WomanDetailsWithFamilyName> findByFamilyId(int familyId);
 }

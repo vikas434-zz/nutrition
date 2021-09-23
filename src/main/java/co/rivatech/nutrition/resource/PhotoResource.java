@@ -25,19 +25,17 @@ public class PhotoResource {
 
     @PostMapping("/beforeMeal")
     @ApiOperation(value = "Upload photo before meal.",
-                  notes = "Upload today's photo. Also, please give full name of the path" +
-                          " e.g. bokaro-bermo-lalganj-kamleshpur-khunti, i.e. from district to tola")
+                  notes = "Upload today's photo. Also, please pass the tola Id.")
     public UploadImageResponse uploadPhotoBeforeMeal(@RequestParam(value = "file") MultipartFile file,
-                                                     @RequestParam(value = "path") String path) {
-        return awss3Service.uploadFile(file, path, MEALTYPE.BEFORE_MEAL);
+                                                     @RequestParam(value = "tolaId") int tolaId) {
+        return awss3Service.uploadFile(file, tolaId, MEALTYPE.BEFORE_MEAL);
     }
 
     @PostMapping("/duringMeal")
     @ApiOperation(value = "Upload photo before meal.",
-                  notes = "Upload today's photo. Also, please give full name of the path" +
-                          " e.g. bokaro-bermo-lalganj-kamleshpur-khunti, i.e. from district to tola")
+                  notes = "Upload today's photo. Also, please pass the tola Id.")
     public UploadImageResponse uploadPhotoAfterMeal(@RequestParam(value = "file") MultipartFile file,
-                                                    @RequestParam(value = "path") String path) {
-        return awss3Service.uploadFile(file, path, MEALTYPE.AFTER_MEAL);
+                                                    @RequestParam(value = "tolaId") int tolaId) {
+        return awss3Service.uploadFile(file, tolaId, MEALTYPE.AFTER_MEAL);
     }
 }

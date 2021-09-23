@@ -37,13 +37,13 @@ public class AWSS3Service {
     @Autowired
     private AmazonS3 s3Client;
 
-    public UploadImageResponse uploadFile(final MultipartFile file, String path, MEALTYPE mealtype) {
+    public UploadImageResponse uploadFile(final MultipartFile file, int tolaId, MEALTYPE mealtype) {
         File fileObj = convertMultiPartFileToFile(file);
         String fileName = dtfDate.format(LocalDate.ofInstant(Instant.now(),
                                                              ZoneId.systemDefault())) + "_" + file.getOriginalFilename();
-        s3Client.putObject(new PutObjectRequest(bucketName + DIV + path + DIV + mealtype, fileName, fileObj));
+        s3Client.putObject(new PutObjectRequest(bucketName + DIV + tolaId + DIV + mealtype, fileName, fileObj));
         fileObj.delete();
-        return new UploadImageResponse(fileName, path, mealtype);
+        return new UploadImageResponse(fileName, tolaId, mealtype);
     }
 
     private File convertMultiPartFileToFile(final MultipartFile file) {
