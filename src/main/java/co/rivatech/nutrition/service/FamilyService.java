@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import co.rivatech.nutrition.constatnts.DateUtil;
 import co.rivatech.nutrition.dto.Children;
 import co.rivatech.nutrition.dto.ConfigSource;
 import co.rivatech.nutrition.dto.Configs;
@@ -243,11 +244,18 @@ public class FamilyService {
                                                                          "No Family details found with full familyId %s ",
                                                                          fullFamilyId)));
         final int familyId = familyFullDetails.getId();
-
         final List<ChildDetails> childDetails = childService.findByFamilyId(familyId);
+        childDetails.forEach(c-> {
+            c.setFullFamilyId(fullFamilyId);
+            c.setDobFormatted(DateUtil.getFormat().format(c.getChildDetailsJson().getDob()));
+        });
         familyFullDetails.setChildFullDetailsJson(childDetails);
 
         final List<WomanDetailsWithFamilyName> womanDetails = womanService.getWomanDetailsByFamilyId(familyId);
+        womanDetails.forEach(w->{
+            w.setFullFamilyId(fullFamilyId);
+            w.setDobFormatted(DateUtil.getFormat().format(w.getWomanDetailsJson().getDob()));
+        });
         familyFullDetails.setWomanFullDetailsJson(womanDetails);
 
         return familyFullDetails;
