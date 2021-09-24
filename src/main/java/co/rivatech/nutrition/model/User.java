@@ -63,10 +63,16 @@ public class User {
     @ApiModelProperty(value = "ROLE_SUPER_ADMIN,\n" +
             "    ROLE_DISTRICT,\n" +
             "    ROLE_BLOCK,\n" +
-            "    ROLE_ANGAWADI,\n" +
+            "    ROLE_ANGANWADI,\n" +
             "    ROLE_SURVEYOR",
                       required = true)
     @Column(name = "role")
     private String role;
+
+    @ApiModelProperty(value = "Id of the district/block attached to. Please pass block/village/tola id associated." +
+            "if the user is superadmin, please pass 0",
+                      required = true)
+    @Column(name = "resource_id")
+    private String resourceId;
 
 }
