@@ -46,4 +46,15 @@ public class AttendenceService {
         }
         return children;
     }
+
+    public Child getChildById(final int id) {
+        return childRepository.findById(id)
+                              .orElseThrow(() -> new ResourceNotFoundException(String.format(
+                                      "No child data found with id %s ",
+                                      id)));
+    }
+
+    public List<Child> getChildByName(final String name) {
+        return childRepository.findByNameContainingAndNameHindiContaining(name);
+    }
 }

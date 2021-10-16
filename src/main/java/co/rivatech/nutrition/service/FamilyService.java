@@ -2,6 +2,7 @@ package co.rivatech.nutrition.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import co.rivatech.nutrition.constatnts.DateUtil;
 import co.rivatech.nutrition.dto.Children;
@@ -245,14 +247,14 @@ public class FamilyService {
                                                                          fullFamilyId)));
         final int familyId = familyFullDetails.getId();
         final List<ChildDetails> childDetails = childService.findByFamilyId(familyId);
-        childDetails.forEach(c-> {
+        childDetails.forEach(c -> {
             c.setFullFamilyId(fullFamilyId);
             c.setDobFormatted(DateUtil.getFormat().format(c.getChildDetailsJson().getDob()));
         });
         familyFullDetails.setChildFullDetailsJson(childDetails);
 
         final List<WomanDetailsWithFamilyName> womanDetails = womanService.getWomanDetailsByFamilyId(familyId);
-        womanDetails.forEach(w->{
+        womanDetails.forEach(w -> {
             w.setFullFamilyId(fullFamilyId);
             w.setDobFormatted(DateUtil.getFormat().format(w.getWomanDetailsJson().getDob()));
         });
@@ -269,8 +271,17 @@ public class FamilyService {
         return familyRepository.findByNameContaining(familyHead);
     }
 
-    public Page<Family> findAll(final Pageable paging) {
-        return familyRepository.findAll(paging);
+    public Page<Family> findAll(final Pageable paging, Integer villageId) {
+        Page<Family> families = familyRepository.findAll(paging);
+        final List<Family> familyList = new ArrayList<>();
+        if (Objects.nonNull(villageId)) {
+            families.get()
+                    .filter(f -> f.getDetails().getVillageId() == villageId)
+                    .collect(Collectors.toList());
+            return new PageImpl<>(familyList);
+        }
+
+        return families;
     }
 
     public void deleteById(final int familyId) {

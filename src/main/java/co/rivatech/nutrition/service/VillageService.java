@@ -9,7 +9,6 @@ import java.util.List;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Village;
 import co.rivatech.nutrition.repository.VillageRepository;
-import springfox.documentation.annotations.Cacheable;
 
 /**
  * @author vranjan
@@ -21,7 +20,7 @@ public class VillageService {
     @Autowired
     private VillageRepository villageRepository;
 
-    @Cacheable("villages")
+    //@Cacheable("villages")
     public List<Village> getAllVillages() {
         List<Village> panchayats = new ArrayList<>();
         Iterable<Village> items = villageRepository.findAll();

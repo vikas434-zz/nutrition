@@ -9,7 +9,6 @@ import java.util.List;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Block;
 import co.rivatech.nutrition.repository.BlockRepository;
-import springfox.documentation.annotations.Cacheable;
 
 /**
  * @author vranjan
@@ -21,7 +20,7 @@ public class BlockService {
     @Autowired
     private BlockRepository blockRepository;
 
-    @Cacheable("blocks")
+    //@Cacheable("blocks")
     public List<Block> getAllBlocks() {
         List<Block> blocks = new ArrayList<>();
         Iterable<Block> items = blockRepository.findAll();

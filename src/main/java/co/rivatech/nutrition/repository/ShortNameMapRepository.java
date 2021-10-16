@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import co.rivatech.nutrition.enums.Entity;
-import springfox.documentation.annotations.Cacheable;
 
 /**
  * @author vranjan
@@ -28,7 +27,7 @@ public class ShortNameMapRepository {
     @Autowired
     private VillageRepository villageRepository;
 
-    @Cacheable("getShortNameMap")
+    //@Cacheable("getShortNameMap")
     public Map<Entity, Map<Integer, String>> getShortNameMap() {
         final Map<Entity, Map<Integer, String>> shortNameMap = new HashMap<>();
 

@@ -50,4 +50,18 @@ public class AttendenceResource {
         return attendenceService.getStudentData(tolaId);
     }
 
+    @GetMapping("/getChildById/{id}")
+    @ApiOperation(value = "Get child data by child id.")
+    public Child getChildById(@PathVariable int id) {
+        return attendenceService.getChildById(id);
+    }
+
+    @GetMapping("/getChildByName/{name}")
+    @ApiOperation(value = "Get child data by child name.")
+    public  List<Child> getChildByName(@PathVariable String name) {
+        return attendenceService.getChildByName(name);
+    }
+
+
+
 }

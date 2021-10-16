@@ -42,7 +42,7 @@ public class LocationDetailsResource {
     @PutMapping("/update")
     @ApiOperation(value = "Update location details to a family.")
     public LocationDetails updateLocationDetails(@Nonnull @RequestBody LocationDetails locationDetails) {
-        return locationDetailsService.save(locationDetails);
+        return locationDetailsService.updateLocation(locationDetails);
     }
 
 }

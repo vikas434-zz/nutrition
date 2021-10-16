@@ -56,24 +56,14 @@ public class FamilyResource {
     public List<Family> getPaginatedFamilyData(@RequestParam(required = false) Integer pageNo,
                                                @RequestParam(required = false) Integer pageSize,
                                                @RequestParam(required = false) String sortBy,
+                                               @RequestParam(required = false) Integer villageId,
                                                @RequestParam(required = false) BigInteger mobile,
                                                @RequestParam(required = false) String familyHead,
                                                @RequestParam(required = false) String familyHeadHindi,
                                                @RequestParam(required = false) String fullFamilyId) {
 
 
-        if (null != pageNo && null !=pageSize && !StringUtil.isNullOrEmpty(sortBy)) {
-            Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-
-            Page<Family> pagedResult = familyService.findAll(paging);
-            if(!pagedResult.isEmpty()) {
-                return pagedResult.getContent();
-            } else {
-                return Collections.emptyList();
-            }
-
-        }
-        else if (null != mobile) {
+        if (null != mobile) {
             return Collections.singletonList(familyService.checkMobileNumber(mobile));
         }
         else if (!StringUtil.isNullOrEmpty(familyHead)) {
@@ -84,6 +74,18 @@ public class FamilyResource {
         }
         else if (!StringUtil.isNullOrEmpty(fullFamilyId)) {
             return Collections.singletonList(familyService.getFamilyDetailsByFullFamilyId(fullFamilyId));
+        }
+        else if (null != pageNo && null != pageSize && !StringUtil.isNullOrEmpty(sortBy)) {
+            Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+            Page<Family> pagedResult = familyService.findAll(paging, villageId);
+            if (!pagedResult.isEmpty()) {
+                return pagedResult.getContent();
+            }
+            else {
+                return Collections.emptyList();
+            }
+
         }
         else {
             return Collections.emptyList();

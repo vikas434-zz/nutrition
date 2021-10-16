@@ -9,7 +9,6 @@ import java.util.List;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Tola;
 import co.rivatech.nutrition.repository.TolaRepository;
-import springfox.documentation.annotations.Cacheable;
 
 /**
  * @author vranjan
@@ -21,7 +20,7 @@ public class TolaService {
     @Autowired
     private TolaRepository tolaRepository;
 
-    @Cacheable("tolas")
+    //@Cacheable("tolas")
     public List<Tola> getAllTola() {
         List<Tola> tolas = new ArrayList<>();
         Iterable<Tola> items = tolaRepository.findAll();

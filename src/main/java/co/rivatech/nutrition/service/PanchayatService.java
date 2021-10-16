@@ -9,7 +9,6 @@ import java.util.List;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Panchayat;
 import co.rivatech.nutrition.repository.PanchayatRepository;
-import springfox.documentation.annotations.Cacheable;
 
 /**
  * @author vranjan
@@ -21,7 +20,7 @@ public class PanchayatService {
     @Autowired
     private PanchayatRepository panchayatRepository;
 
-    @Cacheable("panchayats")
+    //@Cacheable("panchayats")
     public List<Panchayat> getAllPanchayats() {
         List<Panchayat> panchayats = new ArrayList<>();
         Iterable<Panchayat> items = panchayatRepository.findAll();
