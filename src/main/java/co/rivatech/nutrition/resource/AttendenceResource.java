@@ -62,6 +62,9 @@ public class AttendenceResource {
         return attendenceService.getChildByName(name);
     }
 
-
-
+    @GetMapping("/getChildByName/{nameHindi}")
+    @ApiOperation(value = "Get child data by child name.")
+    public  List<Child> getChildByNameHindi(@PathVariable String nameHindi) {
+        return attendenceService.getChildByNameHindi(nameHindi);
+    }
 }

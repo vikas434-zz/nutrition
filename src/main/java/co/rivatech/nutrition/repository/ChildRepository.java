@@ -18,5 +18,7 @@ public interface ChildRepository extends CrudRepository<Child, Integer> {
 
     List<Child> findByTolaId(final int tolaId);
 
-    List<Child> findByNameContainingAndNameHindiContaining(final String name);
+    List<Child> findByNameContaining(final String name);
+
+    List<Child> findByNameHindiContaining(final String name);
 }

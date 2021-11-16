@@ -55,6 +55,10 @@ public class AttendenceService {
     }
 
     public List<Child> getChildByName(final String name) {
-        return childRepository.findByNameContainingAndNameHindiContaining(name);
+        return childRepository.findByNameContaining(name);
+    }
+
+    public List<Child> getChildByNameHindi(final String nameHindi) {
+        return childRepository.findByNameHindiContaining(nameHindi);
     }
 }
