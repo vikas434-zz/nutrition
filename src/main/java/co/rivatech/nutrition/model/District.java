@@ -50,4 +50,9 @@ public class District {
     @Column(name = "created_at")
     @ApiModelProperty(value = "Created at")
     private Date createdAt = new Date();
+
+    @ApiModelProperty(value = "User id of the surveyor/anganwadi",
+                      required = true)
+    @Column(name = "user_id")
+    private int userId;
 }

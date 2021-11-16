@@ -77,4 +77,10 @@ public class User {
     @Column(name = "resource_id")
     private String resourceId;
 
+    @ApiModelProperty(value = "User id of the surveyor/anganwadi",
+                      required = true)
+    @Column(name = "user_id")
+    private int userId;
+
+
 }

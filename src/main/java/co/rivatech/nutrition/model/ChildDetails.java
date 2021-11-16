@@ -50,4 +50,9 @@ public class ChildDetails extends DetailsWithFamilyName {
     @Column(name = "created_at")
     private Date createdAt = new Date();
 
+    @ApiModelProperty(value = "User id of the surveyor/anganwadi",
+                      required = true)
+    @Column(name = "user_id")
+    private int userId;
+
 }

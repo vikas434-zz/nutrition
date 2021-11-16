@@ -42,4 +42,9 @@ public class DailyAttendence {
     @ApiModelProperty(value = "Student data")
     private List<ChildData> childDataList;
 
+    @ApiModelProperty(value = "User id of the surveyor/anganwadi",
+                      required = true)
+    @Column(name = "user_id")
+    private int userId;
+
 }

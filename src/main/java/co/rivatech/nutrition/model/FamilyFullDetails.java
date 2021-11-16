@@ -13,5 +13,4 @@ public class FamilyFullDetails {
     private List<ChildDetails> childFullDetailsJson;
 
     private List<WomanDetailsWithFamilyName> womanFullDetailsJson;
-
 }

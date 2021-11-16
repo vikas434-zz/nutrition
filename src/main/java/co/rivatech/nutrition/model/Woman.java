@@ -38,4 +38,9 @@ public class Woman {
     @ApiModelProperty(value = "Name of the woman in hindi", required = true)
     @Column(name = "name_hi")
     private String nameHindi;
+
+    @ApiModelProperty(value = "User id of the surveyor/anganwadi",
+                      required = true)
+    @Column(name = "user_id")
+    private int userId;
 }

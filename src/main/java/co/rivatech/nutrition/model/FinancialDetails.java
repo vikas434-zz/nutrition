@@ -50,4 +50,9 @@ public class FinancialDetails {
     @Column(name = "updated_at")
     @ApiModelProperty(value = "updatedAt")
     private Date updatedAt;
+
+    @ApiModelProperty(value = "User id of the surveyor/anganwadi",
+                      required = true)
+    @Column(name = "user_id")
+    private int userId;
 }
