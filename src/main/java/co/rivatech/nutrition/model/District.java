@@ -49,5 +49,5 @@ public class District {
 
     @Column(name = "created_at")
     @ApiModelProperty(value = "Created at")
-    private Date createdAt;
+    private Date createdAt = new Date();
 }

@@ -48,6 +48,6 @@ public class ChildDetails extends DetailsWithFamilyName {
 
     @JsonIgnore
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt = new Date();
 
 }

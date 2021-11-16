@@ -43,5 +43,5 @@ public class LMSEvaluation extends LMSDetails {
     private int userId;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt = new Date();
 }

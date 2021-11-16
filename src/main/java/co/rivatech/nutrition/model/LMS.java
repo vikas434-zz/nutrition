@@ -39,5 +39,5 @@ public class LMS {
     private String thumbnailUrl;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt = new Date();
 }

@@ -65,5 +65,5 @@ public class Tola {
 
     @ApiModelProperty(value = "Created at time")
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt = new Date();
 }

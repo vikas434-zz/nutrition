@@ -81,7 +81,7 @@ public class Family extends FamilyFullDetails {
 
     @Column(name = "created_at")
     @ApiModelProperty(value = "createdAt")
-    private Date createdAt;
+    private Date createdAt = new Date();
 
     @Column(name = "updated_at")
     @ApiModelProperty(value = "updatedAt")

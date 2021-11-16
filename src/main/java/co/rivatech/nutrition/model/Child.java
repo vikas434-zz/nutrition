@@ -36,7 +36,7 @@ public class Child {
 
     @JsonIgnore
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt = new Date();
 
     @ApiModelProperty(value = "Name of the child", required = true)
     @Column(name = "name")

@@ -1,5 +1,7 @@
 package co.rivatech.nutrition.model;
 
+import com.google.type.DateTime;
+
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -45,7 +47,7 @@ public class User {
     private BigInteger mobile;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt = new Date();
 
     @Column(name = "updated_at")
     private Date updatedAt;

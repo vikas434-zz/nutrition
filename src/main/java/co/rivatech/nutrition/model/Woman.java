@@ -29,7 +29,7 @@ public class Woman {
     private int familyId;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt = new Date();
 
     @ApiModelProperty(value = "Name of the woman", required = true)
     @Column(name = "name")
