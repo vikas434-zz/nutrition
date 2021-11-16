@@ -1,7 +1,5 @@
 package co.rivatech.nutrition.model;
 
-import com.google.type.DateTime;
-
 import java.math.BigInteger;
 import java.util.Date;
 
