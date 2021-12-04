@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import co.rivatech.nutrition.model.Block;
+import co.rivatech.nutrition.model.User;
 import co.rivatech.nutrition.service.BlockService;
 import io.swagger.annotations.ApiOperation;
 
@@ -58,9 +59,14 @@ public class BlockResource {
 
     @GetMapping("/anganwadiUsers/{blockId}")
     @ApiOperation(value = "Get list of all the anganwadi users, tied to that block. ")
-    public List<Block> getListOfAnganwadiUsersForBlock(@Nonnull @PathVariable int blockId) {
-        //TODO get list of the users for block
-        return blockService.getBlockByDistrictId(blockId);
+    public List<User> getListOfAnganwadiUsersForBlock(@Nonnull @PathVariable int blockId) {
+        return blockService.getAnganwadiList(blockId);
+    }
+
+    @GetMapping("/surveyorUsers/{blockId}")
+    @ApiOperation(value = "Get list of all the surveyor users, tied to that block. ")
+    public List<User> getListOfSurveyorUsersForBlock(@Nonnull @PathVariable int blockId) {
+        return blockService.getSurveyorList(blockId);
     }
 
 }

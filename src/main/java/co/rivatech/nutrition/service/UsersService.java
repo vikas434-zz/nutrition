@@ -51,4 +51,12 @@ public class UsersService {
     public void deleteById(final int userId) {
         usersRepository.deleteById(userId);
     }
+
+    public List<User> getAnganwadiUsersByBlock(final int blockId) {
+        return usersRepository.findByRoleEqualsAndAndBlockId("ROLE_ANGANWADI", blockId);
+    }
+
+    public List<User> getSurveyorUsersByBlock(final int blockId) {
+        return usersRepository.findByRoleEqualsAndAndBlockId("ROLE_SURVEYOR", blockId);
+    }
 }

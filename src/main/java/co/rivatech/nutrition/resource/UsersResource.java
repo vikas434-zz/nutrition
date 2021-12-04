@@ -38,7 +38,7 @@ public class UsersResource {
     }
 
     @PostMapping("/add")
-    @ApiOperation(value = "Adds a system user")
+    @ApiOperation(value = "Add/update a system user")
     public ResponseEntity<User> addSystemUser(@Nonnull @RequestBody User user) {
         return ResponseEntity.ok(usersService.addUser(user));
     }

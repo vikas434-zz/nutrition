@@ -8,6 +8,7 @@ import java.util.List;
 
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.Block;
+import co.rivatech.nutrition.model.User;
 import co.rivatech.nutrition.repository.BlockRepository;
 
 /**
@@ -19,6 +20,9 @@ public class BlockService {
 
     @Autowired
     private BlockRepository blockRepository;
+
+    @Autowired
+    private UsersService usersService;
 
     //@Cacheable("blocks")
     public List<Block> getAllBlocks() {
@@ -45,5 +49,13 @@ public class BlockService {
             throw new ResourceNotFoundException(String.format("No block found with district id %s", districtId));
         }
         return blocks;
+    }
+
+    public List<User> getAnganwadiList(final int blockId) {
+        return usersService.getAnganwadiUsersByBlock(blockId);
+    }
+
+    public List<User> getSurveyorList(final int blockId) {
+        return usersService.getSurveyorUsersByBlock(blockId);
     }
 }
