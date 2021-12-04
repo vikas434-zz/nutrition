@@ -7,6 +7,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.rivatech.nutrition.exception.InvalidResourceException;
 import co.rivatech.nutrition.exception.ResourceNotFoundException;
 import co.rivatech.nutrition.model.User;
 import co.rivatech.nutrition.repository.UsersRepository;
@@ -29,6 +30,13 @@ public class UsersService {
     }
 
     public User addUser(final User user) {
+        if (null != user.getBlockId() && user.getBlockId() == 0
+                || null != user.getDistrictId() && user.getDistrictId() == 0
+                || null != user.getTolaId() && user.getTolaId() == 0) {
+            throw new InvalidResourceException(
+                    "One of the values of the user block,district or tola is passed as 0 which " +
+                            "violate the foreign id constraint. Please pass null.");
+        }
         usersRepository.save(user);
         return user;
     }
@@ -38,5 +46,9 @@ public class UsersService {
                               .orElseThrow(() -> new ResourceNotFoundException(String.format(
                                       "User not found with mobile number %s",
                                       mobile)));
+    }
+
+    public void deleteById(final int userId) {
+        usersRepository.deleteById(userId);
     }
 }

@@ -19,30 +19,52 @@ import co.rivatech.nutrition.constatnts.Constants;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> resourceNotFoundHandling(ResourceNotFoundException exception, WebRequest request){
+    public ResponseEntity<?> resourceNotFoundHandling(ResourceNotFoundException exception, WebRequest request) {
         ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), exception.getMessage(), Constants.NOT_FOUND, request.getDescription(false));
+                new ErrorDetails(new Date(),
+                                 exception.getMessage(),
+                                 Constants.NOT_FOUND,
+                                 request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ResourceAlreadyExistsException.class)
-    public ResponseEntity<?> resourceAlreadyExists(ResourceAlreadyExistsException exception, WebRequest request){
+    public ResponseEntity<?> resourceAlreadyExists(ResourceAlreadyExistsException exception, WebRequest request) {
         ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), exception.getMessage(), Constants.ALREADY_EXISTS, request.getDescription(false));
+                new ErrorDetails(new Date(),
+                                 exception.getMessage(),
+                                 Constants.ALREADY_EXISTS,
+                                 request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MobileAlreadyExistsException.class)
-    public ResponseEntity<?> MobileAlreadyExists(MobileAlreadyExistsException exception, WebRequest request){
+    public ResponseEntity<?> MobileAlreadyExists(MobileAlreadyExistsException exception, WebRequest request) {
         ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), exception.getMessage(), Constants.ALREADY_EXISTS, request.getDescription(false));
+                new ErrorDetails(new Date(),
+                                 exception.getMessage(),
+                                 Constants.ALREADY_EXISTS,
+                                 request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidResourceException.class)
+    public ResponseEntity<?> InvalidResource(InvalidResourceException exception, WebRequest request) {
+        ErrorDetails errorDetails =
+                new ErrorDetails(new Date(),
+                                 exception.getMessage(),
+                                 Constants.ISSUE_IN_REQUEST,
+                                 request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<?> BadRequest(Exception exception, WebRequest request){
+    public ResponseEntity<?> BadRequest(Exception exception, WebRequest request) {
         ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), exception.getMessage(), Constants.ISSUE_IN_REQUEST, request.getDescription(false));
+                new ErrorDetails(new Date(),
+                                 exception.getMessage(),
+                                 Constants.ISSUE_IN_REQUEST,
+                                 request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

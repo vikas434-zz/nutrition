@@ -33,11 +33,12 @@ public class BlockResource {
     @GetMapping("/")
     @ApiOperation(value = "Get lists of all the blocks.")
     public List<Block> getAllDistrict() {
-       return blockService.getAllBlocks();
+        return blockService.getAllBlocks();
     }
 
     @GetMapping("/findById/{id}")
-    @ApiOperation(value = "Find the block details by id.", notes = "Returns block else throws exception.")
+    @ApiOperation(value = "Find the block details by id.",
+                  notes = "Returns block else throws exception.")
     public Block getBlockById(@Nonnull @PathVariable int id) {
         return blockService.getBlockById(id);
     }
@@ -49,9 +50,17 @@ public class BlockResource {
     }
 
     @GetMapping("/findByDistrictId/{districtId}")
-    @ApiOperation(value = "Find the block details by  district id.", notes = "Returns List of block. else throws excpetion")
+    @ApiOperation(value = "Find the block details by  district id.",
+                  notes = "Returns List of block. else throws excpetion")
     public List<Block> getBlockByDistrictId(@Nonnull @PathVariable int districtId) {
         return blockService.getBlockByDistrictId(districtId);
+    }
+
+    @GetMapping("/anganwadiUsers/{blockId}")
+    @ApiOperation(value = "Get list of all the anganwadi users, tied to that block. ")
+    public List<Block> getListOfAnganwadiUsersForBlock(@Nonnull @PathVariable int blockId) {
+        //TODO get list of the users for block
+        return blockService.getBlockByDistrictId(blockId);
     }
 
 }

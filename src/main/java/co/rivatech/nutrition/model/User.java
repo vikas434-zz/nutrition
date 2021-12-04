@@ -3,6 +3,7 @@ package co.rivatech.nutrition.model;
 import java.math.BigInteger;
 import java.util.Date;
 
+import javax.annotation.Nullable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -69,10 +70,22 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    @ApiModelProperty(value = "Id of the district/block attached to. Please pass block/village/tola id associated." +
-            "if the user is superadmin, please pass 0",
+    @ApiModelProperty(value = "District attached to the user, else pass null",
                       required = true)
-    @Column(name = "resource_id")
-    private String resourceId;
+    @Column(name = "district_id")
+    @Nullable
+    private Integer districtId;
+
+    @ApiModelProperty(value = "Block attached to the user, else pass null",
+                      required = true)
+    @Column(name = "block_id")
+    @Nullable
+    private Integer blockId;
+
+    @ApiModelProperty(value = "Anganwadi attached to the user(for surveyor and anganwadi user), else pass null",
+                      required = true)
+    @Column(name = "tola_id")
+    @Nullable
+    private Integer tolaId;
 
 }
