@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import co.rivatech.nutrition.model.Notice;
 import co.rivatech.nutrition.repository.NoticeRepository;
 
@@ -23,5 +25,13 @@ public class NoticeService {
 
     public Page<Notice> findAll(final Pageable pageable) {
         return noticeRepository.findAll(pageable);
+    }
+
+    public List<Notice> findByDistrictId(final int districtId) {
+        return noticeRepository.findByDistrictId(districtId);
+    }
+
+    public List<Notice> findByBlockId(final int blockId) {
+        return noticeRepository.findByBlockId(blockId);
     }
 }

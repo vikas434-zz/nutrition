@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,5 +54,17 @@ public class NoticeResource {
         else {
             return Collections.emptyList();
         }
+    }
+
+    @GetMapping("/getNoticeByDistrict/{districtId}")
+    @ApiOperation(value = "Get notice by districtId")
+    public List<Notice> getNoticeByDistrictId(@PathVariable int districtId) {
+        return noticeService.findByDistrictId(districtId);
+    }
+
+    @GetMapping("/getNoticeByBlock/{blockId}")
+    @ApiOperation(value = "Get notice by districtId")
+    public List<Notice> getNoticeByBlockId(@PathVariable int blockId) {
+        return noticeService.findByBlockId(blockId);
     }
 }

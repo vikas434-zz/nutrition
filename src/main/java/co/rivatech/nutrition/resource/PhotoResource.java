@@ -16,7 +16,6 @@ import javax.annotation.Nonnull;
 
 import co.rivatech.nutrition.dto.UploadImageResponse;
 import co.rivatech.nutrition.enums.MEALTYPE;
-import co.rivatech.nutrition.model.User;
 import co.rivatech.nutrition.service.AWSS3Service;
 import io.swagger.annotations.ApiOperation;
 
