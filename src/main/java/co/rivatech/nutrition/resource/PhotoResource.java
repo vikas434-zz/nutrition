@@ -49,7 +49,7 @@ public class PhotoResource {
 
     @GetMapping("/getPhotosByTolaAndDate/{tolaId}/{type}/{dateYear}/{dateMonth}/{dateDay}")
     @ApiOperation(value = "Get photo by anganwadi id , type = BEFORE_MEAL/AFTER_MEAL, ")
-    public String getListOfPhotosForBlock(@Nonnull @PathVariable int tolaId,
+    public String getListOfPhotos(@Nonnull @PathVariable int tolaId,
                                           @PathVariable String type,
                                           @PathVariable(name = "Year in yyyy, e.g. 2021") String dateYear,
                                           @PathVariable(name = "Month e.g. 06") String dateMonth,
