@@ -40,7 +40,7 @@ public class AWSS3Service {
     public UploadImageResponse uploadFile(final MultipartFile file, int tolaId, MEALTYPE mealtype) {
         File fileObj = convertMultiPartFileToFile(file);
         String fileName = dtfDate.format(LocalDate.ofInstant(Instant.now(),
-                                                             ZoneId.systemDefault())) + "_" + file.getOriginalFilename();
+                                                             ZoneId.systemDefault()));
         s3Client.putObject(new PutObjectRequest(bucketName + DIV + tolaId + DIV + mealtype, fileName, fileObj));
         fileObj.delete();
         return new UploadImageResponse(fileName, tolaId, mealtype);

@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.List;
-
 import javax.annotation.Nonnull;
 
 import co.rivatech.nutrition.dto.UploadImageResponse;
@@ -26,6 +23,10 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/v1/photo")
 public class PhotoResource {
+
+    private static final String S3_PREFIX = "https://vatsalya-photo.s3.ap-south-1.amazonaws.com";
+    private static final String SEPERATOR = "/";
+
 
     @Autowired
     private AWSS3Service awss3Service;
@@ -46,9 +47,13 @@ public class PhotoResource {
         return awss3Service.uploadFile(file, tolaId, MEALTYPE.AFTER_MEAL);
     }
 
-    @GetMapping("/getPhotosByBlock/{blockId}")
-    @ApiOperation(value = "[WORK IN PROGRESS] Get all photos, tied to that block. ")
-    public List<String> getListOfPhotosForBlock(@Nonnull @PathVariable int blockId) {
-        return Collections.emptyList();
+    @GetMapping("/getPhotosByTolaAndDate/{tolaId}/{type}/{dateYear}/{dateMonth}/{dateDay}")
+    @ApiOperation(value = "Get photo by anganwadi id , type = BEFORE_MEAL/AFTER_MEAL, ")
+    public String getListOfPhotosForBlock(@Nonnull @PathVariable int tolaId,
+                                          @PathVariable String type,
+                                          @PathVariable(name = "Year in yyyy, e.g. 2021") String dateYear,
+                                          @PathVariable(name = "Month e.g. 06") String dateMonth,
+                                          @PathVariable(name = "Date e.g. 06") String dateDay) {
+        return S3_PREFIX + SEPERATOR + tolaId + SEPERATOR + type + SEPERATOR + dateYear + SEPERATOR + dateMonth + SEPERATOR + dateDay;
     }
 }
